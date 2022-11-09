@@ -1,0 +1,25 @@
+#info {
+  border-radius: 0.375rem;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.btn_head_clr {
+  background-color: #212529;
+  border-color: #198754;
+  color: #198754;
+  text-decoration-color: #00ff88;
+}
+
+.btn_head_clr:hover {
+  background-color: #198754;
+  border-color: #198754;
+  color: rgb(255, 255, 255);
+}
+
+.btn_head_clr:active {
+  background-color: rgba(#198754, 1) !important;
+  border-color: #198754 !important;
+  color: #198754 !important;
+}
+/* в эйчтиэмэле и кээсэсе можно хоть хуй на залупу (https://github.com/earthgore) */

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "gm": "^1.25.0",
+    "imagemagick": "^0.1.3"
+  }
+}
