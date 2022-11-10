@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="normal.css" id="scale-link">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -10,17 +9,35 @@
     />
   
     <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/body.css">
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Живопись</title>
   </head>
   <body>
-    <div id="site">       
-
+    <div id="site">  
 
     </div>
-    <script type="module" src="./js/modules/site_builder.js"></script>
-    <script class="switch.js"></script>   
-  </body>
+
+    <script type="module" src="./js/recomendation_builder.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stackblitz/sdk@1/bundles/sdk.umd.js"></script>
+    </body>
+    <script  type="module">   
+      document.querySelector('#info').addEventListener('click', () => {   
+        document.getElementById("exampleModalScrollable").style.display = "block"
+        document.getElementById("site").style.position = "fixed"
+        document.getElementById("site").style.width = "99%"
+      });
+    </script>
+
+    <script  type="module">
+      document.querySelector('#clsbtn').addEventListener('click', () => {   
+        document.getElementById("exampleModalScrollable").style.display = "none"
+        document.getElementById("site").style.width = "100%"
+        document.getElementById("site").style.position = "static"
+      });
+    </script>
+
 </html>

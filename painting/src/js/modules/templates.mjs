@@ -4,7 +4,7 @@ const header_recomendation = (block) => {
         <div class="container-fluid" id="header">
             <a type="button" class="btn btn_head_clr" href="collection.html">${block.value[0]}</a>
             <button type="button" class="btn btn_head_clr" id="info" >${block.value[1]}</button>
-            <script src="../info.js"></script>
+            
         </div>
     </nav>
     `;
@@ -49,13 +49,13 @@ const carusel = (block) => {
             <section id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение1"/>
+                        <img height=${block.image.height}, width=${block.image.width} src=${block.image.src} alt="Изображение1"/>
                     </div>
                     <div class="carousel-item">
-                        <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение2"/>
+                        <img height=${block.image.height}, width=${block.image.width} src=${block.image.src} alt="Изображение2"/>
                     </div>
                     <div class="carousel-item">
-                        <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение3"/>
+                        <img height=${block.image.height}, width=${block.image.width} src=${block.image.src} alt="Изображение3"/>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" script="../swipe.js">
@@ -74,20 +74,25 @@ const carusel = (block) => {
 
 function side_panel(block) {
   return `
-        <div class="modal fade show" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: block;" aria-modal="true" role="dialog">
-        <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalScrollableTitle">${block.value[0]}</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+            <div class="modal fade show" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: none; background-color: rgb(46 45 45 / 50%);" aria-modal="true" role="dialog">
+            <div class="py-5 text-center container" style="margin-top:80px">
+                <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalScrollableTitle">${block.value[0]}</h1>
+                                <button type="button" class="btn-close" id="clsbtn"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>${block.value[1]}</p>
+                                <br><br><br><br><br><br><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <p>${block.value[1]}</p>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-            </div>
-            </div>
-        </div>
-        </div>
+
+
         `;
 }
 
@@ -121,6 +126,7 @@ const card = (block) => {
                             <button
                                 type="button"
                                 class="btn btn-sm btn-outline-secondary"
+                                id="info"
                             >
                                 <font style="vertical-align: inherit"
                                 ><font style="vertical-align: inherit">Описание</font></font

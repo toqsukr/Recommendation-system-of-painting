@@ -13,6 +13,17 @@
   </head>
   <body>
     <div id="site"></div>
-    <script type="module" src="./js/modules/collection_builder.js"></script>
+    <script type="module" src="./js/collection_builder.js"></script>
   </body>
+  <script type="module">
+    document.querySelector("#info").addEventListener("click", () => {
+      document.getElementById("exampleModalScrollable").style.display = "block";
+    });
+  </script>
+
+  <script type="module">
+    document.querySelector("#clsbtn").addEventListener("click", () => {
+      document.getElementById("exampleModalScrollable").style.display = "none";
+    });
+  </script>
 </html>

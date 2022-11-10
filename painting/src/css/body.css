@@ -3,6 +3,10 @@ section.container-centre.py-5.text-center {
   margin-left: 10rem !important;
 }
 
+#site {
+  width: 100%;
+}
+
 .sidenav {
   width: 130px;
   position: fixed;
