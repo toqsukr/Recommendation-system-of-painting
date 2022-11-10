@@ -1,9 +1,10 @@
 const header_recomendation = (block) => {
   return `
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Ninth navbar example">
-        <div class="container-fluid">
-        <a type="button" class="btn btn_head_clr" href="collection.html">${block.value[0]}</a>
-        <a type="button" class="btn btn_head_clr" id="info">${block.value[1]}</a>
+    <nav class="navbar navbar-expand-lg bg-dark" id="header">
+        <div class="container-fluid" id="header">
+            <a type="button" class="btn btn_head_clr" href="collection.html">${block.value[0]}</a>
+            <button type="button" class="btn btn_head_clr" id="info" >${block.value[1]}</button>
+            <script src="../info.js"></script>
         </div>
     </nav>
     `;
@@ -11,24 +12,30 @@ const header_recomendation = (block) => {
 
 const header_collection = (block) => {
   return `
-    <nav class="navbar bg-dark"">
+    <nav class="navbar bg-dark navbar-expand-lg" id="header">
         <div class="container-fluid">
-            <a
-            type="button"
-            class="btn btn_head_clr"
-            href="client.html"
-            target="_self"
-            >${block.value[0]}</a
-            >
+        <div id="header">
+        
+        <a
+        type="button"
+        class="btn btn_head_clr"
+        href="client.html"
+        target="_self"
+        >${block.value[0]}</a
+        >
+        </div>
 
             <form class="d-flex" role="search">
             <input
-                class="form-control me-2"
+                class="form-control me-2 head_search"
                 type="search"
                 placeholder="${block.value[1]}"
                 aria-label="Search"
             />
-            <button class="btn btn_head_clr" type="submit">${block.value[2]}</button>
+            
+            <button class="btn btn_head_clr" type="submit">
+            ${block.value[2]}
+            </button>
             </form>
         </div>
     </nav>
@@ -38,31 +45,51 @@ const header_collection = (block) => {
 
 const carusel = (block) => {
   return `    
-    <section class="container-centre py-5 text-center">   
-        <section id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение1"/>
+        <section class="container-centre py-5 text-center">   
+            <section id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение1"/>
+                    </div>
+                    <div class="carousel-item">
+                        <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение2"/>
+                    </div>
+                    <div class="carousel-item">
+                        <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение3"/>
+                    </div>
                 </div>
-                <div class="carousel-item">
-                    <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение2"/>
-                </div>
-                <div class="carousel-item">
-                    <img height=${block.img.height}, width=${block.img.width} src=${block.img.path} alt="Изображение3"/>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" script="../swipe.js">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предыдущий</font></font></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" script="../swipe.js">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Следующий</font></font></span>
-            </button>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" script="../swipe.js">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предыдущий</font></font></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" script="../swipe.js">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Следующий</font></font></span>
+                </button>
+            </section>
         </section>
-    </section>
+
     `;
 };
+
+function side_panel(block) {
+  return `
+        <div class="modal fade show" id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalScrollableTitle">${block.value[0]}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>${block.value[1]}</p>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+            </div>
+        </div>
+        </div>
+        `;
+}
 
 const card = (block) => {
   return `
@@ -82,20 +109,12 @@ const card = (block) => {
                     >
                     <title>Placeholder</title>
                     <rect width="100%" height="100%" fill="#55595c"></rect>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">${block.value[0]}</text>
                     </svg>
 
                     <div class="card-body">
                         <p class="card-text">
-                            <font style="vertical-align: inherit"
-                            ><font style="vertical-align: inherit"
-                                >Это более широкая карточка со вспомогательным текстом
-                                ниже, который является естественным переходом к
-                                дополнительному контенту. </font
-                            ><font style="vertical-align: inherit"
-                                >Этот контент немного длиннее.</font
-                            ></font
-                            >
+                            <font style="vertical-align: inherit">${block.value[1]}</font>
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
@@ -104,27 +123,10 @@ const card = (block) => {
                                 class="btn btn-sm btn-outline-secondary"
                             >
                                 <font style="vertical-align: inherit"
-                                ><font style="vertical-align: inherit">${block.value[0]}</font></font
-                                >
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-sm btn-outline-secondary"
-                            >
-                                <font style="vertical-align: inherit"
-                                ><font style="vertical-align: inherit"
-                                    >${block.value[1]}</font
-                                ></font
+                                ><font style="vertical-align: inherit">Описание</font></font
                                 >
                             </button>
                             </div>
-                            <small class="text-muted"
-                            ><font style="vertical-align: inherit"
-                                ><font style="vertical-align: inherit"
-                                >${block.value[2]}</font
-                                ></font
-                            ></small
-                            >
                         </div>
                     </div>
                 </div>
@@ -165,6 +167,7 @@ export const templates = {
   header_recomendation,
   header_collection,
   carusel,
+  side_panel,
   card,
   footer,
 };
