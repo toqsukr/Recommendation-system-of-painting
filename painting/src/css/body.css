@@ -1,6 +1,10 @@
 section.container-centre.py-5.text-center {
   margin-right: 10rem !important;
   margin-left: 10rem !important;
+  padding-top: 24px !important;
+  padding-bottom: 24px !important;
+  padding-left: 340px;
+  padding-right: 340px;
 }
 
 #site {
@@ -16,4 +20,24 @@ section.container-centre.py-5.text-center {
   background: #eee;
   overflow-x: hidden;
   padding: 8px 0;
+}
+
+#like {
+  display: flexbox;
+  padding-left: 240px;
+  padding-right: 240px;
+  align-self: center !important;
+  width: 100%;
+}
+
+#like:hover {
+  background-color: rgba(255, 255, 255, 0.11) !important;
+}
+
+#main-btn-right {
+  padding-right: 0px;
+}
+
+#main-btn-left {
+  padding-left: 0px;
 }

@@ -46,10 +46,10 @@ const header_collection = (block) => {
 const carusel = (block) => {
   return `    
         <section class="container-centre py-5 text-center">   
-            <section id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <section id="carouselExampleControls" class="carousel slide" style="max-height:692px;" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img height=${block.image.height}, width=${block.image.width} src=${block.image.src} alt="Изображение1"/>
+                        <img id="main-img" height="100%", width="100%" src=${block.image.src} alt="Изображение1"/>
                     </div>
                     <div class="carousel-item">
                         <img height=${block.image.height}, width=${block.image.width} src=${block.image.src} alt="Изображение2"/>
@@ -58,14 +58,19 @@ const carusel = (block) => {
                         <img height=${block.image.height}, width=${block.image.width} src=${block.image.src} alt="Изображение3"/>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" script="../swipe.js">
+                <button class="carousel-control-prev" id="like" type="button" data-bs-target="#carouselExampleControls"  script="#">
+                   
+                    <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Следующий</font></font></span>
+                </button>
+                <button class="carousel-control-prev" id="main-btn-left" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" script="#">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Предыдущий</font></font></span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" script="../swipe.js">
+                <button class="carousel-control-next" id="main-btn-right" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" script="#">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Следующий</font></font></span>
                 </button>
+                
             </section>
         </section>
 
@@ -144,7 +149,7 @@ const card = (block) => {
 
 const footer = (block) => {
   return `
-        <section class="py-5 text-center container">
+        <section class="py-5 text-center container", style="padding-top:1rem !important;padding-bottom:1rem !important;">
         <footer class="pt-4 pt-md-5 border-top", style="background-color: #00000;">
             <div class="row">
             <div class="col-12 col-md">
