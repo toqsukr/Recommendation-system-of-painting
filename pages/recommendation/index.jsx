@@ -1,14 +1,9 @@
-import { HeadRcm } from "../../components/HeadRcm/HeadRcm";
+import { HeadRcm } from "../../components/Header/HeadRcm/HeadRcm";
 
 export default function recommendation() {
-  const block = {
-    cltn: "Моя коллекция",
-    info: "i",
-  };
-
   return (
     <main>
-      <HeadRcm>{block}</HeadRcm>
+      <HeadRcm></HeadRcm>
     </main>
   );
 }

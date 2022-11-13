@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import css from "../HeadRcm/header.module.css";
+import css from "../../Header/header.module.css";
 
 export const BtnInfo = ({ children }) => {
   return (
