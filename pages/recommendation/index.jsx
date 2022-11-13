@@ -2,7 +2,8 @@ import { HeadRcm } from "../../components/HeadRcm/HeadRcm";
 
 export default function recommendation() {
   const block = {
-    value: ["Моя коллекция", "i"],
+    cltn: "Моя коллекция",
+    info: "i",
   };
 
   return (
