@@ -1,0 +1,18 @@
+.btn_head_clr {
+  border-width: 1px;
+  background-color: #1987545b;
+  border-color: #ffffff8d;
+  color: rgb(216, 216, 216);
+}
+
+.btn_head_clr:hover {
+  background-color: #19875498;
+  border-color: #ffffff;
+  color: rgb(255, 255, 255);
+}
+
+.btn_head_clr:active {
+  background-color: rgba(#198754, 1) !important;
+  border-color: #198754bd !important;
+  color: rgb(216, 216, 216) !important;
+}
