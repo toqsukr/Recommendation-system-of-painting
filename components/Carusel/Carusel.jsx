@@ -16,7 +16,7 @@ export const Carusel = ({ children }) => {
                 height={children.height}
                 width={children.width}
                 src={children.path}
-                alt="Изображение1"
+                alt="Изображение"
               />
             </div>
             <div className="carousel-item">
@@ -24,7 +24,7 @@ export const Carusel = ({ children }) => {
                 height={children.height}
                 width={children.width}
                 src={children.path}
-                alt="Изображение2"
+                alt="Изображение"
               />
             </div>
             <div className="carousel-item">
