@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { ColFooter } from "../ColFooter/ColFooter";
 import css from "./footer.module.css";
-import { footer } from "../Header/information";
+import { footer } from "../information";
 import logo from "../images/Logo.png";
 
 export const Footer = () => {

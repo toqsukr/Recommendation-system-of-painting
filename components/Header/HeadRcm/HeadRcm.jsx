@@ -1,7 +1,7 @@
 import React from "react";
 import { BtnHead } from "../../Buttons/BtnHead/BtnHead";
 import { BtnInfo } from "../../Buttons/BtnInfo/BtnInfo";
-import { recommendation } from "../information";
+import { recommendation } from "../../information";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "../header.module.css";
 
