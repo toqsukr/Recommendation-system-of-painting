@@ -1,7 +1,7 @@
 section.container-centre.py-5.text-center {
   margin-right: 10rem !important;
   margin-left: 10rem !important;
-  padding-top: 24px !important;
+  padding-top: 100px !important;
   padding-bottom: 24px !important;
   padding-left: 340px;
   padding-right: 340px;
@@ -9,6 +9,11 @@ section.container-centre.py-5.text-center {
 
 #site {
   width: 100%;
+}
+
+#frame {
+  border: 2px !important;
+  border-color: black !important;
 }
 
 .sidenav {

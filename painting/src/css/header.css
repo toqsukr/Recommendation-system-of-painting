@@ -10,10 +10,11 @@
   padding-bottom: 6px !important;
 }
 
-.header_fixed {
+#header_fixed {
   position: fixed !important;
-  left: 0 !important;
-  top: 0 !important;
+  width: 100%;
+  display: block;
+  z-index: 100;
 }
 
 .head_search {

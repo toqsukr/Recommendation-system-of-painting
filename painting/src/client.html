@@ -17,19 +17,35 @@
     <title>Живопись</title>
   </head>
   <body>
-    <div id="site">  
-
-    </div>
+    <div id="site">  </div>
 
     <script type="module" src="./js/recomendation_builder.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
     <script src="https://cdn.jsdelivr.net/npm/@stackblitz/sdk@1/bundles/sdk.umd.js"></script>
     </body>
+    <script type="module">
+      document.querySelector("#main-btn-right").addEventListener('click', () => {
+          const path = document.getElementById("main-img").src
+          let name = JSON.stringify(path)
+          name = '"' + name.slice(name.search("/img") + 5)
+          let image = {
+            name,
+            grad: 1
+          }
+          image = JSON.stringify(image)
+          const xhr = new XMLHttpRequest()
+          const url = "http://127.0.0.1:5500/src/json/request.json"
+          xhr.open("POST", url, true)
+          xhr.setRequestHeader("Content-Type", "application/json")
+          xhr.send(image)
+      })
+    </script>
+
     <script  type="module">   
       document.querySelector('#info').addEventListener('click', () => {   
           document.getElementById("exampleModalScrollable").style.display = "block"
-          document.getElementById("site").style.position = "fixed"
-          document.getElementById("site").style.width = "99%"
+          document.getElementById("site").style.position = "sticky"
+          document.getElementById("site").style.width = "100%"
         })
     </script>
 

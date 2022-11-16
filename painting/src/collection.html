@@ -18,12 +18,16 @@
   <script type="module">
     document.querySelector("#info").addEventListener("click", () => {
       document.getElementById("exampleModalScrollable").style.display = "block";
+      document.getElementById("site").style.position = "sticky";
+      document.getElementById("site").style.width = "100%";
     });
   </script>
 
   <script type="module">
     document.querySelector("#clsbtn").addEventListener("click", () => {
       document.getElementById("exampleModalScrollable").style.display = "none";
+      document.getElementById("site").style.width = "100%";
+      document.getElementById("site").style.position = "static";
     });
   </script>
 </html>
