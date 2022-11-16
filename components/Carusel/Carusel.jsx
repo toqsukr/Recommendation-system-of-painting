@@ -32,7 +32,7 @@ export const Carusel = ({ children }) => {
                 height={children.height}
                 width={children.width}
                 src={children.path}
-                alt="Изображение3"
+                alt="Изображение"
               />
             </div>
           </div>
