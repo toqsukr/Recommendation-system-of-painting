@@ -5,6 +5,7 @@ export default function collection() {
   return (
     <main>
       <HeadCltn></HeadCltn>
+
       <Footer></Footer>
     </main>
   );
