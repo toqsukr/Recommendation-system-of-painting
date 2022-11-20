@@ -19,7 +19,7 @@ export const recommendation = {
     img: {
       width: 600,
       height: 600,
-      path: "/painting/images/img1.jpg",
+      path: "../images/img1.jpg",
     },
   },
 };

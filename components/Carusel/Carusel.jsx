@@ -1,7 +1,7 @@
-import React, { children } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "./carusel.module.css";
-export const Carusel = ({ children }) => {
+export const Carusel = ({ height, width, path }) => {
   return (
     <section className="container-centre py-5 text-center">
       <div id={css.frame}>
@@ -12,28 +12,13 @@ export const Carusel = ({ children }) => {
         >
           <div className="carousel-inner">
             <div className="carousel-item active">
-              <img
-                height={children.height}
-                width={children.width}
-                src={children.path}
-                alt="Изображение"
-              />
+              <img height={height} width={width} src={path} alt="Изображение" />
             </div>
             <div className="carousel-item">
-              <img
-                height={children.height}
-                width={children.width}
-                src={children.path}
-                alt="Изображение"
-              />
+              <img height={height} width={width} src={path} alt="Изображение" />
             </div>
             <div className="carousel-item">
-              <img
-                height={children.height}
-                width={children.width}
-                src={children.path}
-                alt="Изображение"
-              />
+              <img height={height} width={width} src={path} alt="Изображение" />
             </div>
           </div>
           <button

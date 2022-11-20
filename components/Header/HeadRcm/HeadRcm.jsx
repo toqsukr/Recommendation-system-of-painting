@@ -8,9 +8,9 @@ import css from "../header.module.css";
 export const HeadRcm = () => {
   return (
     <div id={css.header_fixed}>
-      <nav className={`navbar navbar-expand-lg bg-dark`} id={css.header}>
+      <nav className="navbar navbar-expand-lg bg-dark" id={css.header}>
         <div className="container-fluid" id={css.header}>
-          <BtnHead>{recommendation.cltn}</BtnHead>
+          <BtnHead>{recommendation.cltn.name}</BtnHead>
           <BtnInfo>{recommendation.info}</BtnInfo>
         </div>
       </nav>

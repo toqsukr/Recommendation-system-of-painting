@@ -1,6 +1,6 @@
 import React from "react";
 import { BtnHead } from "../../Buttons/BtnHead/BtnHead";
-import { collection } from "../information";
+import { collection } from "../../information";
 import { Search } from "../../Search/Search";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "../header.module.css";
@@ -11,7 +11,7 @@ export const HeadCltn = () => {
       <nav className={`navbar navbar-expand-lg bg-dark`} id={css.header}>
         <div className="container-fluid">
           <div className="header">
-            <BtnHead>{collection.rcmd}</BtnHead>
+            <BtnHead>{collection.rcmd.name}</BtnHead>
           </div>
           <Search>{collection.search}</Search>
         </div>
