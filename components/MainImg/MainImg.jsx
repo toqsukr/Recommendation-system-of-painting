@@ -4,9 +4,9 @@ import { recommendation } from "../information";
 export const MainImg = () => {
   return (
     <Carusel
-      height={recommendation.carusel.height}
-      width={recommendation.carusel.width}
-      path={recommendation.carusel.path}
+      height={recommendation.carusel.img.height}
+      width={recommendation.carusel.img.width}
+      path={recommendation.carusel.img.path}
     />
   );
 };

@@ -5,6 +5,14 @@
   font-weight: 500 !important;
 }
 
+#mainimg {
+  max-width: 660px;
+  max-height: 660px;
+  min-width: 492px;
+  min-height: 492px;
+  margin-top: 30px;
+}
+
 #mainbtnright {
   padding-right: 0px;
 }

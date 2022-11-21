@@ -1,12 +1,23 @@
+import React, { useState, useEffect } from "react";
 import { HeadRcm } from "../components/Header/HeadRcm/HeadRcm";
 import { Footer } from "../components/Footer/Footer";
 import { MainImg } from "../components/MainImg/MainImg";
-export default function recommendation() {
+import { SidePanel } from "../components/SidePanel/SidePanel";
+import { recommendation } from "../components/information";
+
+export default function myRecommendation() {
+  let [info, setInfo] = useState(false);
   return (
-    <main>
-      <HeadRcm />
+    <div>
+      <HeadRcm onClick={() => setInfo(true)} />
       <MainImg />
+      {info && (
+        <SidePanel
+          content={recommendation.info}
+          onClick={() => setInfo(false)}
+        />
+      )}
       <Footer />
-    </main>
+    </div>
   );
 }

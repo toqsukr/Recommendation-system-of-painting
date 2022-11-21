@@ -1,13 +1,13 @@
 .btn_switch {
   border-width: 1px;
-  background-color: #198754;
-  border-color: #0000008d;
-  color: rgb(216, 216, 216);
+  background-color: #ffffff;
+  border-color: #e8e8e88d;
+  color: rgb(131, 131, 131);
 }
 
 .btn_switch:hover {
-  background-color: #198754dd;
-  border-color: #000000;
+  background-color: #696969dd;
+  border-color: #e7e7e7;
   color: rgb(255, 255, 255);
 }
 

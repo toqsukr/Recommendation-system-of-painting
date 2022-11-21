@@ -14,12 +14,12 @@ export const recommendation = {
     name: "Моя коллекция",
     path: "/collection",
   },
-  info: "i",
+  info: "Д. Веласкес. Коронование Девы Марии Пресвятой Троицей",
   carusel: {
     img: {
-      width: 600,
-      height: 600,
-      path: "../images/img1.jpg",
+      width: "80%",
+      height: "80%",
+      path: "http://o9992407.beget.tech/img/img1.jpg",
     },
   },
 };
