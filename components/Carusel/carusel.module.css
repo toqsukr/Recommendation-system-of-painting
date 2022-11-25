@@ -13,10 +13,22 @@
   margin-top: 30px;
 }
 
+#like {
+  border-radius: 2%;
+}
+
 #mainbtnright {
-  padding-right: 0px;
+  margin-right: 10%;
 }
 
 #mainbtnleft {
-  padding-left: 0px;
+  margin-left: 10%;
+}
+
+#mainbtnright:hover {
+  background-color: rgba(240, 248, 255, 0.03);
+}
+
+#mainbtnleft:hover {
+  background-color: rgba(240, 248, 255, 0.03);
 }

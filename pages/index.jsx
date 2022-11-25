@@ -7,6 +7,7 @@ import { recommendation } from "../components/information";
 
 export default function myRecommendation() {
   let [info, setInfo] = useState(false);
+
   return (
     <div>
       <HeadRcm onClick={() => setInfo(true)} />

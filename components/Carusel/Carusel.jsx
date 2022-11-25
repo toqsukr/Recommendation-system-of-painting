@@ -12,27 +12,30 @@ export const Carusel = ({ height, width, path }) => {
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img
-                  style={{ borderRadius: "2%" }}
-                  height={height}
-                  width={width}
-                  src={path}
-                  alt="Изображение"
-                />
+                <form action="">
+                  <input
+                    type="image"
+                    id={css.like}
+                    height={height}
+                    width={width}
+                    src={path}
+                    alt="Изображение"
+                  />
+                </form>
               </div>
+              <button
+                className="carousel-control-prev"
+                id={css.mainbtnleft}
+                type="button"
+                script="#"
+              ></button>
+              <button
+                className="carousel-control-next"
+                id={css.mainbtnright}
+                type="button"
+                script="#"
+              ></button>
             </div>
-            <button
-              className="carousel-control-prev"
-              id={css.mainbtnleft}
-              type="button"
-              script="#"
-            ></button>
-            <button
-              className="carousel-control-next"
-              id={css.mainbtnright}
-              type="button"
-              script="#"
-            ></button>
           </div>
         </section>
       </div>
