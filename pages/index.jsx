@@ -10,6 +10,7 @@ export default function myRecommendation() {
 
   return (
     <div>
+      <title>Рекомендации</title>
       <HeadRcm onClick={() => setInfo(true)} />
       <MainImg />
       {info && (

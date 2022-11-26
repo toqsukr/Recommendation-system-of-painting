@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import { ColFooter } from "../ColFooter/ColFooter";
 import css from "./footer.module.css";
 import { footer } from "../information";
-import logo from "../../images/Logo.png";
 
 export const Footer = () => {
   return (
@@ -16,10 +15,10 @@ export const Footer = () => {
           <div className="col-12 col-md">
             <img
               className="mb-2"
-              src={logo}
+              src="/Logo.png"
               alt="Logo"
               width="24"
-              height="19"
+              height="24"
             />
             <small className="d-block mb-3 text-muted">{footer.year}</small>
           </div>

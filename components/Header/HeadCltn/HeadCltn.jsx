@@ -11,7 +11,7 @@ export const HeadCltn = () => {
       <nav className={`navbar navbar-expand-lg bg-dark`} id={css.header}>
         <div className="container-fluid">
           <div className="header">
-            <BtnHead>{collection.rcmd.name}</BtnHead>
+            <BtnHead path="/">{collection.rcmd.name}</BtnHead>
           </div>
           <Search>{collection.search}</Search>
         </div>

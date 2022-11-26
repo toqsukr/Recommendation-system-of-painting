@@ -5,16 +5,13 @@ import { Gallery } from "../../components/Gallery/Gallery";
 import { SwitchPages } from "../../components/Buttons/SwitchPages/SwitchPages";
 import css from "./collection.module.css";
 
-export default function myCollection() {
-  let [content, setContent] = useState(null);
-  let [page, setPage] = useState(0);
-  // useEffect(() => {
-  //   fetch("http://c843-176-59-13-50.ngrok.io/api/images")
-  //     .then((res) => res.json())
-  //     .then((obj) => setContent(obj));
-  // }, []);
+export default function myCollection({ data }) {
+  const [content, setContent] = useState(data);
+  const [page, setPage] = useState(0);
+
   return (
     <main>
+      <title>Моя коллекция</title>
       <HeadCltn />
       <div>
         {content && (
@@ -40,4 +37,15 @@ export default function myCollection() {
       <Footer />
     </main>
   );
+}
+
+export async function getServerSideProps(context) {
+  const obj = await fetch("https://jsonplaceholder.typicode.com/photos").then(
+    (res) => res.json()
+  );
+  return {
+    props: {
+      data: obj,
+    },
+  };
 }

@@ -12,7 +12,7 @@ export const HeadRcm = ({ onClick }) => {
     <div id={css.header_fixed}>
       <nav className="navbar navbar-expand-lg bg-dark" id={css.header}>
         <div className="container-fluid" id={css.header}>
-          <BtnHead>{recommendation.cltn.name}</BtnHead>
+          <BtnHead path="/collection">{recommendation.cltn.name}</BtnHead>
           <BtnInfo onClick={onClick}>{"i"}</BtnInfo>
         </div>
       </nav>

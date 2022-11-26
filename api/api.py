@@ -1,12 +1,11 @@
 from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
-from flask_cors import CORS
-from flask_ngrok import run_with_ngrok
+import socket
+# from flask_ngrok import run_with_ngrok
 
 
 app = Flask(__name__)
-CORS(app)
-run_with_ngrok(app)
+# run_with_ngrok(app)
 ai_decision = [
     {
         "id": 0,
@@ -46,9 +45,19 @@ ai_collection = [
   }
 ]
 
-@app.route('/api/collection', methods=['GET'])
-def get_collection():
-    return ai_collection
+@app.route('/api/collection', methods=['GET', 'POST'])
+def collection():
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect(('localhost', 3434))
+    if request.method == 'POST':
+        request_data = request.get_json()
+        client.send((str(request_data) + "POST").encode('utf-8'))
+        mess = client.recv(1024).decode('utf-8')
+        return mess
+    else:
+        client.send(("POST").encode('utf-8'))
+        data = eval(client.recv(1024).decode('utf-8'))
+        return data
 
 @app.route('/api/decisions', methods=["GET", "PUT"])
 def rate():    
@@ -71,4 +80,3 @@ def get_new():
 
 if __name__ == '__main__':
     app.run()
-    
