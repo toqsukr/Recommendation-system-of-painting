@@ -1,6 +1,6 @@
 from flask import Flask, request
-from flask_restful import Api, Resource, reqparse
 import socket
+import json
 # from flask_ngrok import run_with_ngrok
 
 
@@ -30,22 +30,12 @@ ai_image_pack = [
     }
 ]
 
-ai_collection = [
-  {
-    "id": 18,
-    "title": "laboriosam odit nam necessitatibus et illum dolores reiciendis",
-    "url": "https://via.placeholder.com/600/1fe46f",
-    "thumbnailUrl": "https://via.placeholder.com/150/1fe46f"
-  },
-  {
-    "id": 19,
-    "title": "perferendis nesciunt eveniet et optio a",
-    "url": "https://via.placeholder.com/600/56acb2",
-    "thumbnailUrl": "https://via.placeholder.com/150/56acb2"
-  }
-]
+@app.route('/api/server', methods=['POST'])
+def server_answer():
+    return "server answer"
 
-@app.route('/api/collection', methods=['GET', 'POST'])
+
+@app.route('/api/collection', methods=['GET', 'POST', 'DELETE'])
 def collection():
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect(('localhost', 3434))
@@ -54,10 +44,16 @@ def collection():
         client.send((str(request_data) + "POST").encode('utf-8'))
         mess = client.recv(1024).decode('utf-8')
         return mess
-    else:
-        client.send(("POST").encode('utf-8'))
-        data = eval(client.recv(1024).decode('utf-8'))
-        return data
+    elif request.method == 'GET':
+        client.send(("GET").encode('utf-8'))
+        data = json.loads((client.recv(1024).decode('utf-8')))
+        cltn = list(map(lambda el: eval("{" + f"'id':'{el[0]}', 'src':'{el[1]}', 'descript':'{el[2]}'" + "}"), data))
+        return cltn
+    elif request.method == 'DELETE':
+        request_data = request.get_json()
+        client.send((str(request_data) + "DELETE").encode('utf-8'))
+        mess = client.recv(1024).decode('utf-8')
+        return mess
 
 @app.route('/api/decisions', methods=["GET", "PUT"])
 def rate():    
