@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { BtnSearch } from "../Buttons/BtnSearch/BtnSearch";
 import { Input } from "../Input/Input";
 
-export const Search = ({ children }) => {
+export const Search = ({ children, content }) => {
   return (
     <div>
       <form className="d-flex" role="search">

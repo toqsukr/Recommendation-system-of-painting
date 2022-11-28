@@ -5,7 +5,7 @@ import { Search } from "../../Search/Search";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "../header.module.css";
 
-export const HeadCltn = () => {
+export const HeadCltn = ({ content }) => {
   return (
     <div id={css.header_fixed}>
       <nav className={`navbar navbar-expand-lg bg-dark`} id={css.header}>
@@ -13,7 +13,7 @@ export const HeadCltn = () => {
           <div className="header">
             <BtnHead path="/">{collection.rcmd.name}</BtnHead>
           </div>
-          <Search>{collection.search}</Search>
+          <Search content={content}>{collection.search}</Search>
         </div>
       </nav>
     </div>
