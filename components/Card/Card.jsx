@@ -6,11 +6,16 @@ export const Card = ({ data, title, url }) => {
   return (
     <div className="col">
       <div className="card shadow-sm">
-        <div className="card-body">
+        <div className="card-body" style={{ height: "410px" }}>
           <div>
-            <img width="80%" height="80%" src={url} alt="Изображение" />
+            <img width="60%" height="60%" src={url} alt="Изображение" />
           </div>
-          <p className="card-text">
+          <p
+            className="card-text"
+            style={{
+              marginTop: "10px",
+            }}
+          >
             <font>{title}</font>
           </p>
           <div className="d-flex justify-content-between align-items-center">
@@ -22,7 +27,7 @@ export const Card = ({ data, title, url }) => {
               >
                 <font>Описание</font>
               </button>
-              <button href="#" type="button" className="btn-close"></button>
+
               {info && (
                 <SidePanel onClick={() => setInfo(false)} content={data} />
               )}

@@ -1,11 +1,13 @@
 from flask import Flask, request
 import socket
 import json
+from flask_socketio import SocketIO
 # from flask_ngrok import run_with_ngrok
 
 
 app = Flask(__name__)
 # run_with_ngrok(app)
+socketio = SocketIO(app)
 ai_decision = [
     {
         "id": 0,
@@ -75,4 +77,4 @@ def get_new():
     return ai_image_pack
 
 if __name__ == '__main__':
-    app.run()
+    socketio.run(app)
