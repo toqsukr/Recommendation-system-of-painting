@@ -3,6 +3,7 @@ import { HeadCltn } from "../../components/Header/HeadCltn/HeadCltn";
 import { Footer } from "../../components/Footer/Footer";
 import { Gallery } from "../../components/Gallery/Gallery";
 import { SwitchBar } from "../../components/SwitchBar/SwitchBar";
+import { NotFound } from "../../components/NotFound/NotFound";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function myCollection({ data }) {
@@ -21,8 +22,10 @@ export default function myCollection({ data }) {
         updatePage={updatePage}
       />
       <div>
-        {content && (
+        {content ? (
           <Gallery content={content?.slice(page * 6, (page + 1) * 6)} />
+        ) : (
+          <NotFound />
         )}
       </div>
       <SwitchBar content={content} page={page} updatePage={updatePage} />
