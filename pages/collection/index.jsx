@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { HeadCltn } from "../../components/Header/HeadCltn/HeadCltn";
 import { Footer } from "../../components/Footer/Footer";
 import { Gallery } from "../../components/Gallery/Gallery";

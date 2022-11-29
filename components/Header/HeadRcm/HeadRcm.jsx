@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BtnHead } from "../../Buttons/BtnHead/BtnHead";
 import { BtnInfo } from "../../Buttons/BtnInfo/BtnInfo";
 import { recommendation } from "../../information";
-import { SidePanel } from "../../SidePanel/SidePanel";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "../header.module.css";
 

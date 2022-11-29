@@ -6,7 +6,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
-        {Math.trunc(content.length / 6) != 0 && (
+        {Math.ceil(content.length / 6) - 1 != 0 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
@@ -19,7 +19,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </li>
         )}
 
-        {Math.trunc(content.length / 6) != 0 &&
+        {Math.ceil(content.length / 6) - 1 != 0 &&
           (page === 0 ? (
             <li className="page-item active">
               <span className="page-link">1</span>
@@ -56,7 +56,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {page != 0 && page != Math.trunc(content.length / 6) && (
+        {page != 0 && page != Math.ceil(content.length / 6) - 1 && (
           <>
             <li className="page-item active">
               <span className="page-link">{page + 1}</span>
@@ -64,7 +64,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {page < Math.trunc(content.length / 6) - 1 && (
+        {page < Math.ceil(content.length / 6) - 2 && (
           <>
             <li className="page-item">
               <ToPage
@@ -78,29 +78,27 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {page < Math.trunc(content.length / 6) - 2 && (
+        {page < Math.ceil(content.length / 6) - 3 && (
           <li>
             <span className="page-link">...</span>
           </li>
         )}
 
-        {Math.trunc(content.length / 6) != 0 &&
-          (page === Math.trunc(content.length / 6) ? (
+        {Math.ceil(content.length / 6) - 1 != 0 &&
+          (page === Math.ceil(content.length / 6) - 1 ? (
             <li className="page-item active">
-              <span className="page-link">
-                {Math.trunc(content.length / 6) + 1}
-              </span>
+              <span className="page-link">{Math.ceil(content.length / 6)}</span>
             </li>
           ) : (
             <li className="page-item">
               <ToPage
-                onClick={() => updatePage(Math.trunc(content.length / 6))}
+                onClick={() => updatePage(Math.ceil(content.length / 6) - 1)}
               >
-                {Math.trunc(content.length / 6) + 1}
+                {Math.ceil(content.length / 6)}
               </ToPage>
             </li>
           ))}
-        {Math.trunc(content.length / 6) != 0 && (
+        {Math.ceil(content.length / 6) - 1 != 0 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
@@ -108,7 +106,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
               type="button"
               onClick={() =>
                 updatePage((p) =>
-                  p + 1 > Math.trunc(content.length / 6) ? p : p + 1
+                  p + 1 > Math.ceil(content.length / 6) - 1 ? p : p + 1
                 )
               }
             >
