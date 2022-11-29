@@ -6,7 +6,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
-        {Math.ceil(content.length / 6) != 0 && (
+        {Math.trunc(content.length / 6) != 0 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
@@ -19,7 +19,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </li>
         )}
 
-        {Math.ceil(content.length / 6) != 0 &&
+        {Math.trunc(content.length / 6) != 0 &&
           (page === 0 ? (
             <li className="page-item active">
               <span className="page-link">1</span>
@@ -84,7 +84,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </li>
         )}
 
-        {Math.ceil(content.length / 6) != 0 &&
+        {Math.trunc(content.length / 6) != 0 &&
           (page === Math.ceil(content.length / 6) - 1 ? (
             <li className="page-item active">
               <span className="page-link">{Math.ceil(content.length / 6)}</span>
@@ -98,7 +98,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
               </ToPage>
             </li>
           ))}
-        {Math.ceil(content.length / 6) != 0 && (
+        {Math.trunc(content.length / 6) != 0 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
