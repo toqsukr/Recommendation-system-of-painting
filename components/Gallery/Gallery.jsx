@@ -13,7 +13,7 @@ export const Gallery = ({ content }) => {
         style={{ marginTop: "30px" }}
       >
         {content.map((el) => (
-          <Card data={el.thumbnailUrl} title={el.title} url={el.url} />
+        <Card data={el} title={el.title} url={el.src} />
         ))}
       </div>
     </section>

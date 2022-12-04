@@ -17,7 +17,7 @@ export const Search = ({
       title === ""
         ? (newContent = fullGallery)
         : fullGallery.forEach((el) => {
-            if (el.title.includes(title)) newContent.push(el);
+            if (el.title.toLowerCase().includes(title.toLowerCase())) newContent.push(el);
           });
       updatePage(0);
       return newContent;

@@ -16,8 +16,8 @@ export const SidePanel = ({ content, onClick }) => {
         <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalScrollableTitle">
-                {content}
+              <h1 className="modal-title fs-4" id="exampleModalScrollableTitle">
+                {content.title}
               </h1>
               <button
                 onClick={onClick}
@@ -27,7 +27,10 @@ export const SidePanel = ({ content, onClick }) => {
               ></button>
             </div>
             <div className="modal-body">
-              <br />
+
+              <h1 className="modal-title fs-5" id="exampleModalScrollableTitle">
+                {content.descript}
+              </h1>
               <br />
             </div>
           </div>

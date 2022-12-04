@@ -35,7 +35,7 @@ export default function myCollection({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const obj = await fetch("https://jsonplaceholder.typicode.com/photos").then(
+  const obj = await fetch("https://c736-188-243-183-72.ngrok.io/user/collection").then(
     (res) => res.json()
   );
   return {
