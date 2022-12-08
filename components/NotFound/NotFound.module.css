@@ -1,4 +1,17 @@
 #Error {
-  font-family: "Courier New", Courier, monospace;
-  font-size: large;
+  font-family: "Garamond", monospace;
+  font-size:x-large;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: black;
+  text-align: center;
+}
+
+#box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 260px;
+  padding-bottom: 190px
 }

@@ -1,10 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import { ColFooter } from "../ColFooter/ColFooter";
 import css from "./footer.module.css";
 import { footer } from "../information";
 
-export const Footer = () => {
+export const Footer = ({onClick}) => {
   return (
     <section className="py-5 text-center container" id={css.footer}>
       <footer
@@ -20,11 +19,14 @@ export const Footer = () => {
               width="24"
               height="24"
             />
-            <small className="d-block mb-3 text-muted">{footer.year}</small>
+            <small id={css.foot_btn} className="d-block mb-3 text-muted">{footer.year}</small>
           </div>
-          <ColFooter>{footer.features}</ColFooter>
-          <ColFooter>{footer.resources}</ColFooter>
-          <ColFooter>{footer.about}</ColFooter>
+          <div className="col-6 col-md">
+            <a id={css.foot_btn} href="https://github.com/toqsukr/Recommendation-system-of-painting" target="_blank">{footer.resources}</a>
+          </div>
+          <div className="col-6 col-md">
+            <a type="button" id={css.foot_btn} onClick={onClick}>{footer.about.title}</a>
+          </div>
         </div>
       </footer>
     </section>

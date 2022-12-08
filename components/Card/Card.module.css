@@ -1,5 +1,18 @@
-#descript {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
+#delete {
+  background-color: rgb(255, 255, 255);
+  color: rgba(149, 149, 149, 0.886);
+  border-color: rgba(149, 149, 149, 0.886);
+  font-size: small;
+}
+
+#delete:hover {
+  background-color: #bb2d3b;
+  color:rgb(255, 255, 255);
+  border-color: #bb2d3b;
+}
+
+#delete:active {
+  background-color: rgb(255, 255, 255);
+  color: rgba(149, 149, 149, 0.886);
+  border-color: #bb2d3b;
 }

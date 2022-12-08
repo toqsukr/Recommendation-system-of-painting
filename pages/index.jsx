@@ -3,23 +3,27 @@ import { HeadRcm } from "../components/Header/HeadRcm/HeadRcm";
 import { Footer } from "../components/Footer/Footer";
 import { MainImg } from "../components/MainImg/MainImg";
 import { SidePanel } from "../components/SidePanel/SidePanel";
-import { recommendation } from "../components/information";
-
+import { recommendation, footer } from "../components/information";
 export default function myRecommendation() {
-  let [info, setInfo] = useState(false);
-
+  const [info, setInfo] = useState(false);
+  const [about, setAbout] = useState(false);
   return (
     <div>
       <title>Рекомендации</title>
       <HeadRcm onClick={() => setInfo(true)} />
       <MainImg />
+      {about && (
+          <SidePanel content={footer.about}
+          onClick={() => setAbout(false)}
+          />
+        )}
       {info && (
         <SidePanel
-          content={recommendation.info}
-          onClick={() => setInfo(false)}
-        />
+        content={recommendation.info}
+        onClick={() => setInfo(false)}
+          />
       )}
-      <Footer />
+      <Footer onClick={() => setAbout(true)}/>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import css from "./SidePanel.module.css"
 import "bootstrap/dist/css/bootstrap.css";
 
 export const SidePanel = ({ content, onClick }) => {
@@ -16,7 +17,7 @@ export const SidePanel = ({ content, onClick }) => {
         <div className="modal-dialog modal-dialog-scrollable">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-4" id="exampleModalScrollableTitle">
+              <h1 id={css.title}>
                 {content.title}
               </h1>
               <button
@@ -28,7 +29,7 @@ export const SidePanel = ({ content, onClick }) => {
             </div>
             <div className="modal-body">
 
-              <h1 className="modal-title fs-5" id="exampleModalScrollableTitle">
+              <h1 id={css.descript}>
                 {content.descript}
               </h1>
               <br />

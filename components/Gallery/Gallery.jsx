@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Card } from "../Card/Card";
 
-export const Gallery = ({ content }) => {
+export const Gallery = ({ updateContent, updatePage, content }) => {
   return (
     <section
       className="py-5 text-center container"
@@ -13,7 +13,7 @@ export const Gallery = ({ content }) => {
         style={{ marginTop: "30px" }}
       >
         {content.map((el) => (
-        <Card data={el} title={el.title} url={el.src} />
+        <Card updateContent={updateContent} updatePage={updatePage} data={el} title={el.title} url={el.src} hex={el.hex}/>
         ))}
       </div>
     </section>
