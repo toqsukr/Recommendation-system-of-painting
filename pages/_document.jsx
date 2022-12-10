@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <link rel="shortcut icon" href="/Logo.png" type="image/png" />
       </Head>
-      <body>
+      <body style={{"margin": 0}}>
         <Main />
         <NextScript />
       </body>

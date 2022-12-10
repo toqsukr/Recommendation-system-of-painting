@@ -1,0 +1,28 @@
+.container {
+    background-color: #e9ecef;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: min(450px, 100%);
+    margin: auto;
+    height: 100vh;
+    gap: 30px;
+}
+
+.form_inputs {
+    font-size: large;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    gap: 15px;
+}
+
+#btn {
+    font-size: large;
+    border-color: rgba(0, 0, 0, 0.505);
+}

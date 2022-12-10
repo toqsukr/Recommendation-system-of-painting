@@ -5,16 +5,25 @@
   font-weight: 500 !important;
 }
 
-#mainimg {
-  max-width: 660px;
-  max-height: 660px;
-  min-width: 492px;
-  min-height: 492px;
-  margin-top: 30px;
+#title {
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+#mainimg {
+  min-width: 460px;
+  min-height: 489px;
+  max-width: 522px;
+  max-height: 596px;
+  margin-top: 42px;
+  
+}
 #like {
   border-radius: 2%;
+  min-width: 60%;
+  min-width: 60%;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 #mainbtnright {

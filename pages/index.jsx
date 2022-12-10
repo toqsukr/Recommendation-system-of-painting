@@ -3,15 +3,18 @@ import { HeadRcm } from "../components/Header/HeadRcm/HeadRcm";
 import { Footer } from "../components/Footer/Footer";
 import { MainImg } from "../components/MainImg/MainImg";
 import { SidePanel } from "../components/SidePanel/SidePanel";
-import { recommendation, footer } from "../components/information";
-export default function myRecommendation() {
+import { footer, api } from "../components/information";
+export default function myRecommendation({data}) {
+  const [content, setContent] = useState(data)
   const [info, setInfo] = useState(false);
   const [about, setAbout] = useState(false);
+  const [count, setCount] = useState(0)
+  const swipeImage = (p) => setCount(p)
   return (
     <div>
       <title>Рекомендации</title>
       <HeadRcm onClick={() => setInfo(true)} />
-      <MainImg />
+      <MainImg swipeImage={swipeImage} content={content[count]} />
       {about && (
           <SidePanel content={footer.about}
           onClick={() => setAbout(false)}
@@ -19,11 +22,22 @@ export default function myRecommendation() {
         )}
       {info && (
         <SidePanel
-        content={recommendation.info}
+        content={content[count]}
         onClick={() => setInfo(false)}
           />
       )}
       <Footer onClick={() => setAbout(true)}/>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const obj = await fetch(`${api.url}/user/rcmd`).then(
+    (res) => res.json()
+  );
+  return {
+    props: {
+      data: obj,
+    },
+  };
 }

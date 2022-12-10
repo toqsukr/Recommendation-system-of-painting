@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Input } from "../Input/Input";
 import "bootstrap/dist/css/bootstrap.css";
 
 export const Search = ({
@@ -10,10 +11,8 @@ export const Search = ({
   let [title, setTitle] = useState("");
   function handleClick(e) {
     e.preventDefault();
-    console.log(title);
     updateContent(() => {
       let newContent = [];
-      console.log(title);
       title === ""
         ? (newContent = fullGallery)
         : fullGallery.forEach((el) => {
@@ -26,13 +25,14 @@ export const Search = ({
   return (
     <div>
       <form onChange={handleClick} className="d-flex" role="search">
-        <input
+        <Input
           className="form-control me-2 head_search"
           type="search"
           value={title}
           placeholder={children.placeholder}
           aria-label="Search"
-          onInputCapture={(e) => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
+          onInputCapture = {(e) => setTitle(e.target.value)}
         />
       </form>
     </div>

@@ -1,0 +1,14 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input input {
+    background: white;
+    border: 2px solid black;
+    padding: 8px 15px;
+    border-radius: 7px;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+}
