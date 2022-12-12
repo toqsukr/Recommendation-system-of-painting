@@ -24,6 +24,11 @@
   min-width: 60%;
   max-width: 90%;
   max-height: 90%;
+  border-color: rgb(69, 40, 6) !important;
+}
+
+#section {
+  padding-top: 62px !important;
 }
 
 #mainbtnright {

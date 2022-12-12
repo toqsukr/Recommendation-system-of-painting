@@ -14,22 +14,21 @@ export const Card = ({ updateContent, updatePage, data, title, url, hex }, key) 
       }, (e) => {
         console.log(e)
       })
-      
-
   }
   return (
     <div className="col">
       <div className="card shadow-sm">
         <div className="card-body" >
           <div>
-            <img key={key} width="70%" height="70%" src={url} alt="Изображение" />
+            <a href={url} target='_blank'>
+
+            <img className="border border-3" id={css.img} key={key} width="70%" height="70%" src={url} alt="Изображение" />
+            </a>
           <p
             className="card-text"
-            style={{
-              marginTop: "10px",
-            }}
+            
           >
-            <a onClick={() => setInfo(true)}>{title}</a>
+            <a id={css.title} type="button" onClick={() => setInfo(true)}>{title}</a>
           </p>
           <button onClick={deleteCard} type="button" className="btn btn-danger" id={css.delete}>Удалить из коллекции</button>
               {info && (

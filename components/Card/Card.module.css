@@ -16,3 +16,15 @@
   color: rgba(149, 149, 149, 0.886);
   border-color: #bb2d3b;
 }
+
+#img {
+  border-radius: 5%;
+}
+
+#title {
+  margin-top: 5px;
+}
+
+#title:hover {
+  text-decoration-line:underline
+}

@@ -14,17 +14,6 @@ export const recommendation = {
     name: "Моя коллекция",
     path: "/collection",
   },
-  info: {
-    title: "Д. Веласкес. Коронование Девы Марии Пресвятой Троицей",
-    descript: "Awesome picture",
-  } ,
-  carusel: {
-    img: {
-      width: "80%",
-      height: "80%",
-      path: "http://o9992407.beget.tech/img/img1.jpg"
-    },
-  },
 };
 
 export const footer = {
@@ -37,5 +26,5 @@ export const footer = {
 };
 
 export const api = {
-  url: "https://b948-178-162-88-18.ngrok.io"
+  url: "https://d766-94-25-228-150.ngrok.io"
 }
