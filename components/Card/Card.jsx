@@ -7,8 +7,12 @@ export const Card = ({ updateContent, updatePage, data, title, url, hex }, key) 
   const [info, setInfo] = useState(false);
   const deleteCard = () => {
       fetch(`${api.url}/user/collection`, {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        mode: "cors",
         method: "DELETE",
-        body: hex,
+        body: JSON.stringify(hex),
       }).then((obj) => {
          console.log(obj)
       }, (e) => {

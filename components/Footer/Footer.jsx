@@ -2,8 +2,10 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "./footer.module.css";
 import { footer } from "../information";
-
+import { setCookie } from "../../utils/setCookies";
+import { useRouter } from "next/router";
 export const Footer = ({onClick}) => {
+  const router = useRouter()
   return (
     <section className="py-5 text-center container" id={css.footer}>
       <footer
@@ -26,6 +28,13 @@ export const Footer = ({onClick}) => {
           </div>
           <div className="col-6 col-md">
             <a type="button" id={css.foot_btn} onClick={onClick}>{footer.about.title}</a>
+          </div>
+          <div className="col-6 col-md">
+            <a type="button" id={css.foot_btn} onClick={() => {
+                setCookie("refreshToken", "")
+                setCookie("accessToken", "")
+                router.push("/sign-in")
+            }}>Выход</a>
           </div>
         </div>
       </footer>

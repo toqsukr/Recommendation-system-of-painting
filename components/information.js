@@ -26,5 +26,5 @@ export const footer = {
 };
 
 export const api = {
-  url: "https://d766-94-25-228-150.ngrok.io"
+  url: "https://7b00-188-243-183-72.ngrok.io"
 }

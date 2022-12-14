@@ -7,18 +7,38 @@ class NotFound(Exception):
 import uuid
 from flask import Blueprint, request, jsonify, make_response
 from firebase_admin import firestore
-from flask_cors import cross_origin, CORS
 
 db = firestore.client()
 user_Ref = db.collection('user')
 user_rcmd = db.collection('rcmd')
+user_dcsn = db.collection('dcsn')
 
 userAPI = Blueprint('userAPI', __name__)
 
-CORS(userAPI)
+@userAPI.route('/decision', methods=['POST', 'OPTIONS'])
+def decision():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response(), 204
+    if request.method == 'POST':
+        try:
+            print(request)   
+            # обработка request.json базой знаний
+             
+            # user_dcsn.document('*').delete()
+            # id = uuid.uuid4()
+            # user_dcsn.document(id.hex).set(request.json)
+            
+            return _corsify_actual_response(jsonify({"success": True})), 200
+        except RepeateError as e:
+            return f"An Error Occured: {e}"
+        except Exception as e:
+            return f"An Error Occured: {e}"
 
-@userAPI.route('/rcmd', methods=['GET', 'POST'])
+
+@userAPI.route('/rcmd', methods=['GET', 'POST', 'OPTIONS'])
 def recommendation():
+    if request.method == 'OPTIONS':
+        return _build_cors_preflight_response(), 204
     if request.method == 'GET':
         try:
             package_img = [doc.to_dict() for doc in user_rcmd.stream()]
@@ -41,8 +61,7 @@ def recommendation():
             return f"An Error Occured: {e}"
 
 
-@userAPI.route('/collection', methods=['GET', 'POST', 'DELETE', 'OPTIONS'])
-@cross_origin()
+@userAPI.route('/collection', methods=['GET', 'POST', 'DELETE', 'OPTIONS'], )
 def collection():
     if request.method == 'OPTIONS':
         return _build_cors_preflight_response(), 204
@@ -82,12 +101,15 @@ def collection():
 
 def _build_cors_preflight_response():
     response = make_response()
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Headers", "*")
-    response.headers.add("Access-Control-Allow-Methods", "*")
+    response.headers["Access-Control-Allow-Origin"] = "origin-list"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+    response.headers["Access-Control-Allow-Methods"] = "GET, DELETE, POST, OPTIONS"
+    response.headers["Access-Control-Max-Age"] = 300
+    print(response.headers)
     return response
 
 def _corsify_actual_response(response):
-    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers["Access-Control-Allow-Origin"] = "origin-list"
+    print(response.headers)
     return response
 
