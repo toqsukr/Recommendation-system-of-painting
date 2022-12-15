@@ -1,4 +1,4 @@
-export function postFetch(endpoint, bodyObj) {
+export async function postFetch(endpoint, bodyObj) {
     return fetch(endpoint, {
         method: "POST",
         headers: {

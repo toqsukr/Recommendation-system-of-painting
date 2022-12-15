@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { getCookie } from '../../utils/setCookies'
 
 export const Layout = ({ children, title, onlyOnAuth }) => {
@@ -11,10 +11,7 @@ export const Layout = ({ children, title, onlyOnAuth }) => {
             router.push('/').then(() => {
                 setChecked(true)
             })
-        } else {
-            setChecked(true)
-        }
-    
+        } else  setChecked(true)  
     }, [])
     return (
         <>

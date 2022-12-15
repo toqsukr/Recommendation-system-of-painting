@@ -14,6 +14,7 @@ export default function myRecommendation({data}) {
   const [about, setAbout] = useState(false);
   const [count, setCount] = useState(0)
   const [email, setEmail] = useState('')
+  const [auth, setAuth] = useState(false)
   const router = useRouter()
   const swipeImage = (p) => setCount(p)
   useEffect(() => {
@@ -22,14 +23,16 @@ export default function myRecommendation({data}) {
   useEffect(() => {
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
         res => {
-          res.user ? setEmail(res.user.email) : router.push('/sign-in')
+            if(res.user) {
+              setEmail(res.user.email)
+              setAuth(true)
+            } 
+            else router.push('/sign-in')
         }
     )
   }, [])
   return (
-    <Layout onlyOnAuth>
-        <div>
-          <title>Рекомендации</title>
+    <Layout title="Рекомендации" onlyOnAuth={auth}>
           <HeadRcm onClick={() => setInfo(true)} />
           <MainImg email={email} swipeImage={swipeImage} content={content[count]} />
           {about && (
@@ -44,7 +47,6 @@ export default function myRecommendation({data}) {
               />
           )}
           <Footer onClick={() => setAbout(true)}/>
-        </div>
     </Layout>
   );
 }

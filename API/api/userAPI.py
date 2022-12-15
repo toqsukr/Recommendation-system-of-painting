@@ -7,11 +7,12 @@ class NotFound(Exception):
 import uuid
 from flask import Blueprint, request, jsonify, make_response
 from firebase_admin import firestore
+import os
 
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 db = firestore.client()
 user_Ref = db.collection('user')
 user_rcmd = db.collection('rcmd')
-user_dcsn = db.collection('dcsn')
 
 userAPI = Blueprint('userAPI', __name__)
 
@@ -21,7 +22,7 @@ def decision():
         return _build_cors_preflight_response(), 204
     if request.method == 'POST':
         try:
-            print(request)   
+            print(request.json)   
             # обработка request.json базой знаний
              
             # user_dcsn.document('*').delete()
@@ -101,15 +102,13 @@ def collection():
 
 def _build_cors_preflight_response():
     response = make_response()
-    response.headers["Access-Control-Allow-Origin"] = "origin-list"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type"
-    response.headers["Access-Control-Allow-Methods"] = "GET, DELETE, POST, OPTIONS"
-    response.headers["Access-Control-Max-Age"] = 300
-    print(response.headers)
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "*"
+    response.headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8"
     return response
 
 def _corsify_actual_response(response):
-    response.headers["Access-Control-Allow-Origin"] = "origin-list"
-    print(response.headers)
+    response.headers["Access-Control-Allow-Origin"] = "*"
     return response
 

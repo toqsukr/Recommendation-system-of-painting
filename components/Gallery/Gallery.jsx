@@ -2,6 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "./Gallery.module.css"
 import { Card } from "../Card/Card";
+import { NotFound } from "../NotFound/NotFound";
 
 export const Gallery = ({ updateContent, updatePage, content }) => {
   return (
@@ -10,7 +11,7 @@ export const Gallery = ({ updateContent, updatePage, content }) => {
       id={css.section}
     >
       <div
-        className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"        id={css.container}
+        className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id={css.container}
       >
         {content.map((el) => (
         <Card key={el.hex} updateContent={updateContent} updatePage={updatePage} data={el} title={el.title} url={el.src} hex={el.hex}/>

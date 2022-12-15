@@ -13,7 +13,13 @@ export const MainImg = ({ email, content, swipeImage}) => {
   const [delay, setDelay] = useState(true)
   function handleClick(e) {
     e.preventDefault();
-    postFetch(`${api.url}/user/rcmd`, content.src
+    postFetch(`${api.url}/user/collection`, 
+      {
+        src: content.src,
+        title: content.title,
+        descript: content.descript,
+        hex: content.hex,
+      }
     ).then((obj) => {
       console.log(obj)
     }, (e) => {
@@ -48,7 +54,7 @@ export const MainImg = ({ email, content, swipeImage}) => {
                    700)
                    postFetch(`${api.url}/user/decision`, {
                       "userID": email,
-                      "imgID": content.hex,
+                      "imgName": content.title,
                       "decision": -1,
                    }).then(
                       res => {
@@ -73,7 +79,7 @@ export const MainImg = ({ email, content, swipeImage}) => {
                    700)
                    postFetch(`${api.url}/user/decision`, {
                       "userID": email,
-                      "imgID": content.hex,
+                      "imgName": content.title,
                       "decision": 1,
                   }).then(
                       res => {

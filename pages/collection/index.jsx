@@ -18,6 +18,7 @@ export default function myCollection({ data }) {
   const [content, setContent] = useState(data);
   const [page, setPage] = useState(0);
   const [about, setAbout] = useState(false);
+  const [auth, setAuth] = useState(false)
   const router = useRouter()
   useEffect(() => {
     router.prefetch('/sign-in')
@@ -25,7 +26,7 @@ export default function myCollection({ data }) {
   useEffect(() => {
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
         res => {
-          if(!res.user)  router.push('/sign-in')
+          res["success"] ? setAuth(true) : router.push('/sign-in')
         }
     )
   }, [])
@@ -34,8 +35,7 @@ export default function myCollection({ data }) {
   const updateContent = (p) => setContent(p);
 
   return (
-    <Layout>
-      <title>Моя коллекция</title>
+    <Layout title="Моя коллекция" onlyOnAuth={auth}>
       <HeadCltn
         fullGallery={fullGallery}
         updateContent={updateContent}

@@ -14,27 +14,28 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [correct, setCorrect] = useState(true)
+  const [auth, setAuth] = useState(false)
   const router = useRouter();
   useEffect(() => {
     router.prefetch('/')
   }, [])
   function FormHandler(e) {
-    e.preventDefault()
-    postFetch("https://norma.nomoreparties.space/api/auth/login", {
-        email,
-        password,
-    }).then(res => {
-      if(!res["success"])   throw Error("Incorrect email or password!")
-      setCookie("accessToken", res.accessToken, 1);
-      setCookie("refreshToken", res.refreshToken);
-      router.push("/")
-    }).catch(() => {
-      setCorrect(false)
-    })
-
+      e.preventDefault()
+      postFetch("https://norma.nomoreparties.space/api/auth/login", {
+          email,
+          password,
+      }).then(res => {
+        if(!res["success"])   throw Error("Incorrect email or password!")
+        setCookie("accessToken", res.accessToken, 1);
+        setCookie("refreshToken", res.refreshToken);
+        setAuth(true)
+        router.push("/")
+      }).catch(() => {
+        setCorrect(false)
+      })
   }
   return (
-    <Layout title="Вход" onlyOnAuth>
+    <Layout title="Вход" onlyOnAuth={!auth}>
       <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>

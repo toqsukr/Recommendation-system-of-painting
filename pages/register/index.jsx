@@ -10,34 +10,36 @@ import Link from 'next/link';
 import css from './register.module.css'
 
 export default function register() {
-  const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
-const [correct, setCorrect] = useState(true)
-const [name, setName] = useState('')
-const router = useRouter();
-useEffect(() => {
-  router.prefetch('/')
-}, [])
-function FormHandler(e) {
-  e.preventDefault()
-  postFetch("https://norma.nomoreparties.space/api/auth/register", {
-      email,
-      password,
-      name,
-  }).then(res => {
-    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-    res => {
-      if(!res.user) throw Error("Same email has already exist!")
-      setCookie("accessToken", res.accessToken, 1);
-      setCookie("refreshToken", res.refreshToken)
-      router.push("/")
-    }).catch(() => {
-      setCorrect(false)
-    })
-  })
-}
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [correct, setCorrect] = useState(true)
+    const [name, setName] = useState('')
+    const [auth, setAuth] = useState(false)
+    const router = useRouter();
+    useEffect(() => {
+      router.prefetch('/')
+    }, [])
+    function FormHandler(e) {
+      e.preventDefault()
+      postFetch("https://norma.nomoreparties.space/api/auth/register", {
+          email,
+          password,
+          name,
+      }).then(res => {
+        getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+        obj => {
+          if(!obj["success"]) throw Error("Same email has already exist!")
+          setCookie("accessToken", res.accessToken, 1);
+          setCookie("refreshToken", res.refreshToken)
+          setAuth(true)
+          router.push("/")
+        }).catch(() => {
+          setCorrect(false)
+        })
+      })
+    }
   return (
-    <Layout title="Регистрация" onlyOnAuth>
+    <Layout title="Регистрация" onlyOnAuth={!auth}>
       <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
