@@ -10,6 +10,14 @@
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+#success_alert {
+  height: 100px;
+  display: block;
+  position:static;
+  width: 100px;
+  z-index: 50;
+}
+
 #mainimg {
   min-width: 460px;
   min-height: 489px;
@@ -19,11 +27,12 @@
   
 }
 #like {
+
   border-radius: 2%;
   min-width: 60%;
   min-width: 60%;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 70%;
+  max-height: 70%;
   border-color: rgb(69, 40, 6) !important;
 }
 

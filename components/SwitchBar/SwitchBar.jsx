@@ -2,11 +2,11 @@ import React from "react";
 import { ToPage } from "../Buttons/ToPage/ToPage";
 import { SwitchPages } from "../Buttons/SwitchPages/SwitchPages";
 
-export const SwitchBar = ({ updatePage, page, content }) => {
+export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
-        {Math.trunc(content.length / 6) != 0 && (
+        {pageCount != 1 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
@@ -19,7 +19,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </li>
         )}
 
-        {Math.trunc(content.length / 6) != 0 &&
+        {pageCount != 1 &&
           (page === 0 ? (
             <li className="page-item active">
               <span className="page-link">1</span>
@@ -56,7 +56,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {page != 0 && page != Math.ceil(content.length / 6) - 1 && (
+        {page != 0 && page != pageCount - 1 && (
           <>
             <li className="page-item active">
               <span className="page-link">{page + 1}</span>
@@ -64,7 +64,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {page < Math.ceil(content.length / 6) - 2 && (
+        {page < pageCount - 2 && (
           <>
             <li className="page-item">
               <ToPage
@@ -78,13 +78,13 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {page < Math.ceil(content.length / 6) - 3 && (
+        {page < pageCount - 3 && (
           <li>
             <span className="page-link">...</span>
           </li>
         )}
 
-        {Math.trunc(content.length / 6) != 0 &&
+        {pageCount != 1 &&
           (page === Math.ceil(content.length / 6) - 1 ? (
             <li className="page-item active">
               <span className="page-link">{Math.ceil(content.length / 6)}</span>
@@ -98,7 +98,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
               </ToPage>
             </li>
           ))}
-        {Math.trunc(content.length / 6) != 0 && (
+        {pageCount != 1 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"

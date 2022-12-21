@@ -1,3 +1,6 @@
+import json
+
+
 class RepeateError(Exception):
     pass
     
@@ -11,24 +14,47 @@ import os
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 db = firestore.client()
+state = False
 user_Ref = db.collection('user')
 user_rcmd = db.collection('rcmd')
 
+decision1 = [
+    {
+        "decision": -1,
+        "hex": "73bc9b5219754380ba8b272a7396b80c",
+        "imgName": "Петуорт (Сассекс), поместье графа Эгремонтского. Росистое утро",
+        "userID": "ejs@mail.ru"
+    }
+]
 userAPI = Blueprint('userAPI', __name__)
 
-@userAPI.route('/decision', methods=['POST', 'OPTIONS'])
+@userAPI.route('/state', methods=[ 'GET' ])
+def statement():
+    global state
+    print(state)
+    return _corsify_actual_response(jsonify({"state": state})), 200
+
+@userAPI.route('/decision', methods=[ 'GET', 'POST', 'OPTIONS'])
 def decision():
+    global decision1
+    global state
+
     if request.method == 'OPTIONS':
         return _build_cors_preflight_response(), 204
+    if request.method == 'GET':
+        #decision = [doc.to_dict() for doc in user_dcsn.stream()]
+        state = False
+        dec = decision1[0]
+        decision1.pop(0)
+        return _corsify_actual_response(jsonify(dec)), 200
     if request.method == 'POST':
         try:
-            print(request.json)   
-            # обработка request.json базой знаний
-             
-            # user_dcsn.document('*').delete()
-            # id = uuid.uuid4()
-            # user_dcsn.document(id.hex).set(request.json)
-            
+            package_img = [doc.to_dict() for doc in user_rcmd.stream()]
+            if(len(package_img) > 0):
+                for el in package_img:
+                    if(el["title"] == request.json["imgName"]):    user_rcmd.document(el["hex"]).delete()
+            state = True
+            decision1.append(request.json)
             return _corsify_actual_response(jsonify({"success": True})), 200
         except RepeateError as e:
             return f"An Error Occured: {e}"
@@ -48,12 +74,17 @@ def recommendation():
             return f"An Error Occured: {e}"
     if request.method == 'POST':
         try:
+
             package_img = [doc.to_dict() for doc in user_rcmd.stream()]
+
             flag = False
-            if(not len(package_img) and request.json["src"] in list(map(lambda el: el["src"], package_img))):    flag = True
+            if(len(package_img) > 0):
+                if(request.json["src"] in list(map(lambda el: el["src"], package_img))):    flag = True
             if(flag):   raise RepeateError("This picture has already exist!")
             id = uuid.uuid4()
+            # user_rcmd.document(package_img[0]["hex"]).delete()
             request.json.update({"hex": id.hex})
+            package_img.append(request.json)
             user_rcmd.document(id.hex).set(request.json)
             return _corsify_actual_response(jsonify({"success": True})), 200
         except RepeateError as e:
@@ -70,16 +101,16 @@ def collection():
         try:
             all_images = [doc.to_dict() for doc in user_Ref.stream()]
             flag = False
-            if(not len(all_images) and request.json["src"] in list(map(lambda el: el["src"], all_images))):    flag = True
-            if(flag):   raise RepeateError("This picture has already exist!")
+            if(len(all_images) > 0):
+                if(request.json["src"] in list(map(lambda el: el["src"], all_images))):   raise RepeateError("This picture has already exist!")
             id = uuid.uuid4()
             request.json.update({"hex": id.hex})
             user_Ref.document(id.hex).set(request.json)
             return _corsify_actual_response(jsonify({"success": True})), 200
         except RepeateError as e:
-            return f"An Error Occured: {e}"
+            return _corsify_actual_response(jsonify({"success": False})), 200
         except Exception as e:
-            return f"An Error Occured: {e}"
+            return f"An error occured{e}"
     if request.method == 'GET':
         try:
             all_images = [doc.to_dict() for doc in user_Ref.stream()]
@@ -105,7 +136,7 @@ def _build_cors_preflight_response():
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Headers"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "*"
-    response.headers["Content-Type"] = "application/x-www-form-urlencoded; charset=UTF-8"
+    response.headers["Content-Type"] = "*"
     return response
 
 def _corsify_actual_response(response):

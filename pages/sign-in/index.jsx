@@ -26,7 +26,7 @@ export default function SignIn() {
           password,
       }).then(res => {
         if(!res["success"])   throw Error("Incorrect email or password!")
-        setCookie("accessToken", res.accessToken, 1);
+        setCookie("accessToken", res.accessToken, 2);
         setCookie("refreshToken", res.refreshToken);
         setAuth(true)
         router.push("/")
@@ -40,8 +40,11 @@ export default function SignIn() {
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
             {!correct && (
-              <div class="alert alert-danger" role="alert">
+              <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"></svg>
+              <div>
               Неверный email или пароль!
+              </div>
             </div>
             )}
                 <legend>Войдите в аккаунт</legend>

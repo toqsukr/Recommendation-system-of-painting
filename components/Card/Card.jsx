@@ -3,41 +3,44 @@ import "bootstrap/dist/css/bootstrap.css";
 import { SidePanel } from "../SidePanel/SidePanel";
 import {api} from "../information"
 import css from "./Card.module.css"
-export const Card = ({ updateContent, updatePage, data, title, url, hex }, key) => {
+export const Card = ({ fullContent, content, updateContent, updatePage, data}, key) => {
   const [info, setInfo] = useState(false);
-  const [hidden, setHidden] = useState(false)
-  function deleteCard() {
-      setHidden(true)
+
+  async function deleteCard() {
+      updateContent(() => {
+        let newContent = [];
+        fullContent.forEach((el) => {
+          if (el.hex != data.hex) newContent.push(el);
+        });
+        updatePage(0);
+        return newContent;
+      });
       fetch(`${api.url}/user/collection`, {
         headers: {
           "Content-Type": "application/json"
         },
         mode: "cors",
         method: "DELETE",
-        body: JSON.stringify({hex}),
-      }).then((obj) => {
-         console.log(obj)
-         
-      }, (e) => {
+        body: JSON.stringify({"hex": data.hex}),
+      }).then((e) => {
         console.log(e)
       })
   }
   return (
     <>
-      {!hidden && (
         <div className="col">
         <div className="card shadow-sm">
           <div className="card-body" >
             <div>
-              <a href={url} target='_blank'>
+              <a href={data.src} target='_blank'>
   
-              <img className="border border-3" id={css.img} key={key} width="70%" height="70%" src={url} alt="Изображение" />
+              <img className="border border-3" id={css.img} key={data.hex} width="70%" height="70%" src={data.src} alt="Изображение" />
               </a>
             <p
               className="card-text"
               
             >
-              <a id={css.title} type="button" onClick={() => setInfo(true)}>{title}</a>
+              <a id={css.title} type="button" onClick={() => setInfo(true)}>{data.title}</a>
             </p>
             <button onClick={deleteCard} type="button" className="btn btn-danger" id={css.delete}>Удалить из коллекции</button>
                 {info && (
@@ -47,7 +50,6 @@ export const Card = ({ updateContent, updatePage, data, title, url, hex }, key) 
           </div>
         </div>
       </div>
-      )}
     </>
   );
 };

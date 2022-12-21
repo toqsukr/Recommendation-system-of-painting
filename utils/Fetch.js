@@ -1,5 +1,5 @@
 export async function postFetch(endpoint, bodyObj) {
-    return fetch(endpoint, {
+    return await fetch(endpoint, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -20,8 +20,8 @@ export async function postFetch(endpoint, bodyObj) {
     })
 }
 
-export function getFetch(endpoint, auth) {
-    return fetch(endpoint, {
+export async function getFetch(endpoint, auth) {
+    return await fetch(endpoint, {
         method: "GET",
         redirect: "follow",
         headers: {

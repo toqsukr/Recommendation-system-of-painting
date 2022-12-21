@@ -6,7 +6,7 @@ import { SwitchBar } from "../../components/SwitchBar/SwitchBar";
 import { NotFound } from "../../components/NotFound/NotFound";
 import { SidePanel } from "../../components/SidePanel/SidePanel";
 import { getFetch } from "../../utils/Fetch";
-import { getCookie } from "../../utils/setCookies";
+import { getCookie, setCookie } from "../../utils/setCookies";
 import { useRouter } from "next/router"
 import { Layout } from "../../components/Layout/Layout";
 import {footer} from "../../components/information"
@@ -19,23 +19,38 @@ export default function myCollection({ data }) {
   const [page, setPage] = useState(0);
   const [about, setAbout] = useState(false);
   const [auth, setAuth] = useState(false)
+  const [pageCount, setPageCount] = useState(Math.ceil(content.length / 6))
   const router = useRouter()
+  
   useEffect(() => {
-    router.prefetch('/sign-in')
-  }, [])
-  useEffect(() => {
-    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-        res => {
+    const sendUser = () => {
+        getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+          res =>  {if(res.user)  res["success"] ? setAuth(true) : router.push('/sign-in')}
+      )
+    }
+
+    if(getCookie("refreshToken"))  {
+      if(!getCookie("accessToken")) {
+        postFetch("https://norma.nomoreparties.space/api/auth/token", {
+          token: getCookie("refreshToken"),
+        }).then(res => {
           res["success"] ? setAuth(true) : router.push('/sign-in')
-        }
-    )
+          setCookie("accessToken", res.accessToken, 2);
+          setCookie("refreshToken", res.refreshToken);
+        })
+      } else {
+        sendUser()
+      }
+    } else  router.push("/sign-in")
   }, [])
+
   const fullGallery = data;
   const updatePage = (p) => setPage(p);
   const updateContent = (p) => setContent(p);
 
   return (
-    <Layout title="Моя коллекция" onlyOnAuth={auth}>
+    <>
+    {auth && (<Layout title="Моя коллекция">
       <HeadCltn
         fullGallery={fullGallery}
         updateContent={updateContent}
@@ -44,7 +59,7 @@ export default function myCollection({ data }) {
       />
       <div>
         {content.length ? (
-          <Gallery updateContent={updateContent} updatePage={updatePage} content={content?.slice(page * 6, (page + 1) * 6)} />
+          <Gallery fullContent={content} updateContent={updateContent} updatePage={updatePage} content={content?.slice(page * 6, (page + 1) * 6)} />
         ) : (
           <NotFound />
         )}
@@ -54,9 +69,10 @@ export default function myCollection({ data }) {
           onClick={() => setAbout(false)}
           />
         )}
-      <SwitchBar content={content} page={page} updatePage={updatePage} />
+      <SwitchBar pageCount={pageCount} content={content} page={page} updatePage={updatePage} />
       <Footer onClick={() => setAbout(true)}/>
-    </Layout>
+    </Layout>)}
+    </>
   );
 }
 
