@@ -6,7 +6,9 @@ import { getFetch, postFetch } from '../../utils/Fetch';
 import { setCookie } from '../../utils/setCookies';
 import { Layout } from '../../components/Layout/Layout';
 import {useRouter} from "next/router"
+import { api } from '../../components/information';
 import Link from 'next/link'
+import crc32 from 'crc-32'
 import css from './SignIn.module.css'
 
 export default function SignIn() {
@@ -19,13 +21,14 @@ export default function SignIn() {
   useEffect(() => {
     router.prefetch('/')
   }, [])
-  function FormHandler(e) {
+  async function FormHandler(e) {
       e.preventDefault()
       postFetch("https://norma.nomoreparties.space/api/auth/login", {
           email,
           password,
       }).then(res => {
         if(!res["success"])   throw Error("Incorrect email or password!")
+
         setCookie("accessToken", res.accessToken, 2);
         setCookie("refreshToken", res.refreshToken);
         setAuth(true)
@@ -40,15 +43,14 @@ export default function SignIn() {
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
             {!correct && (
-              <div class="alert alert-danger d-flex align-items-center" role="alert">
-              <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"></svg>
+              <div className="alert alert-danger d-flex align-items-center" role="alert">
               <div>
               Неверный email или пароль!
               </div>
             </div>
             )}
-                <legend>Войдите в аккаунт</legend>
-                <Input onChange={e => setEmail(e.target.value)} value={email} type='email' placeholder='Почта' required>Почта</Input>
+                <legend>Вход в аккаунт</legend>
+                <Input onChange={e => setEmail(e.target.value.toString().toLowerCase())} value={email} type='email' placeholder='Почта' required>Почта</Input>
                 <Input onChange={e => setPassword(e.target.value)} value={password} type='password' placeholder='Пароль' required>Пароль</Input>
                 
             </fieldset>

@@ -5,7 +5,7 @@ import { Gallery } from "../../components/Gallery/Gallery";
 import { SwitchBar } from "../../components/SwitchBar/SwitchBar";
 import { NotFound } from "../../components/NotFound/NotFound";
 import { SidePanel } from "../../components/SidePanel/SidePanel";
-import { getFetch } from "../../utils/Fetch";
+import { getFetch, postFetch } from "../../utils/Fetch";
 import { getCookie, setCookie } from "../../utils/setCookies";
 import { useRouter } from "next/router"
 import { Layout } from "../../components/Layout/Layout";
@@ -77,7 +77,7 @@ export default function myCollection({ data }) {
 }
 
 export async function getServerSideProps(context) {
-  const obj = await fetch(`${api.url}/user/collection`, {mode: 'no-cors'}).then(
+  const obj = await fetch(`${api.url}/user/collection`).then(
     (res) => res.json()
   );
   return {

@@ -95,6 +95,7 @@ def recommendation():
 
 @userAPI.route('/collection', methods=['GET', 'POST', 'DELETE', 'OPTIONS'], )
 def collection():
+    global user
     if request.method == 'OPTIONS':
         return _build_cors_preflight_response(), 204
     if request.method == 'POST':
@@ -123,7 +124,7 @@ def collection():
             flag = False
             if(request.json["hex"] in list(map(lambda el: el["hex"], all_images))):    flag = True
             if(not flag):   raise NotFound("Not found!")
-            user_Ref.document(request.json.get("hex")).delete()
+            user_Ref.document(request.json["hex"]).delete()
             return _corsify_actual_response(jsonify({"success": True})), 200
         except NotFound as e:
             return f"An Error Occured: {e}"

@@ -1,0 +1,17 @@
+{
+    "name": "Picture App",
+    "short_name": "Picture",
+    "icons": [
+      {
+        "src": "Logo.png",
+        "sizes": "32x32",
+        "type": "image/png",
+        "purpose": "any maskable"
+      }
+    ],
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+  }

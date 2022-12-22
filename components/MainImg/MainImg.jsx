@@ -2,20 +2,16 @@ import React, {useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {api} from "../information"
 import css from "./MainImg.module.css";
-import { getFetch, postFetch } from "../../utils/Fetch";
+import { postFetch } from "../../utils/Fetch";
 export const MainImg = ({ updateContent, content, email}) => {
-  // const img = new Image()
-  // img.onload;
-  // img.src = content.src
-  // const [param, setParam] = useState(img)     
-  // const updateParam = (img) => setParam(img)
-  const [decision, setDecision] = useState(NaN)
   const [exist, setExist] = useState(false)
   const [success, setSuccess] = useState(false)
   const [delay, setDelay] = useState(true)
   const [update, setUpadte] = useState(false)
 
-
+  const img = new window.Image()
+  img.src = content[0].src
+  img.onload
   useEffect(() => {
     if(update) {
       fetch(`${api.url}/user/rcmd`).then(
@@ -29,12 +25,18 @@ export const MainImg = ({ updateContent, content, email}) => {
   })
   function handleLike(e) {
     e.preventDefault();
+    if(!delay)  return
+    setDelay(false)
+    setTimeout(async () => {
+      setDelay(true)
+    }, 700)
     postFetch(`${api.url}/user/collection`, 
       {
         src: content[0].src,
         title: content[0].title,
         descript: content[0].descript,
         hex: content[0].hex,
+        userID: email,
       }
     ).then((obj) => {
       if(obj["success"]) {
@@ -69,7 +71,7 @@ export const MainImg = ({ updateContent, content, email}) => {
   return (
     <>
     {content && (
-    <section id={css.section} className="container container-lg container-md container-sm container-centre py-5 text-center" >
+    <section id={css.section} className="container container-md container-sm container-centre py-5 text-center" >
               {!exist 
               ?
                 success && (<div className="alert alert-success alert-dismissible" role="alert">
@@ -87,15 +89,8 @@ export const MainImg = ({ updateContent, content, email}) => {
             id={css.mainimg}
           >
             <div className="carousel-inner">
-                  <div id={css.container} className='container container-sm container-md container-lg'>
-                <a type="button" onClick={handleLike}>
-                  <img
-                    className='border border-4'
-                    id={css.like}
-                    src={content[0].src}
-                    alt="Изображение"
-                  />
-                  </a>
+                  <div id={css.container} className='container container-sm container-md'>
+                <input id={css.like} className='border border-4' src={content[0].src} type="image" onClick={handleLike}/>
               <button
               onClick={() => {
                 handleSwipe(-1)

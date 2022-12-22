@@ -6,7 +6,7 @@ export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
-        {pageCount != 1 && (
+        {Math.trunc(content.length / 6) != 0 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
@@ -19,7 +19,7 @@ export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
           </li>
         )}
 
-        {pageCount != 1 &&
+        {Math.trunc(content.length / 6) != 0 &&
           (page === 0 ? (
             <li className="page-item active">
               <span className="page-link">1</span>
@@ -56,7 +56,7 @@ export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
           </>
         )}
 
-        {page != 0 && page != pageCount - 1 && (
+        {page != 0 && page != Math.ceil(content.length / 6) - 1 && (
           <>
             <li className="page-item active">
               <span className="page-link">{page + 1}</span>
@@ -64,7 +64,7 @@ export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
           </>
         )}
 
-        {page < pageCount - 2 && (
+        {page < Math.ceil(content.length / 6) - 2 && (
           <>
             <li className="page-item">
               <ToPage
@@ -78,13 +78,13 @@ export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
           </>
         )}
 
-        {page < pageCount - 3 && (
+        {page < Math.ceil(content.length / 6) - 3 && (
           <li>
             <span className="page-link">...</span>
           </li>
         )}
 
-        {pageCount != 1 &&
+        {Math.trunc(content.length / 6) != 0 &&
           (page === Math.ceil(content.length / 6) - 1 ? (
             <li className="page-item active">
               <span className="page-link">{Math.ceil(content.length / 6)}</span>
@@ -98,7 +98,7 @@ export const SwitchBar = ({ pageCount, updatePage, page, content }) => {
               </ToPage>
             </li>
           ))}
-        {pageCount != 1 && (
+        {Math.trunc(content.length / 6) != 0 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"

@@ -29,12 +29,11 @@ export const Card = ({ fullContent, content, updateContent, updatePage, data}, k
   return (
     <>
         <div className="col">
-        <div className="card shadow-sm">
-          <div className="card-body" >
-            <div>
+        <div className="card shadow-sm" id={css.card}>
+          <div className="card-body"  >
+            <div >
               <a href={data.src} target='_blank'>
-  
-              <img className="border border-3" id={css.img} key={data.hex} width="70%" height="70%" src={data.src} alt="Изображение" />
+              <img className="border border-3" id={css.img} key={data.hex} src={data.src} alt="Изображение" />
               </a>
             <p
               className="card-text"

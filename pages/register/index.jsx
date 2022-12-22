@@ -28,6 +28,7 @@ export default function register() {
       }).then(res => {
         getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
         obj => {
+          console.log(obj)
           if(!obj["success"]) throw Error("Same email has already exist!")
           setCookie("accessToken", res.accessToken, 1);
           setCookie("refreshToken", res.refreshToken)
@@ -44,15 +45,14 @@ export default function register() {
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
             {!correct && (
-              <div class="alert alert-danger d-flex align-items-center" role="alert">
-              <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"></svg>
+              <div className="alert alert-danger d-flex align-items-center" role="alert">
               <div>
               Этот email уже используется!
               </div>
             </div>
             )}
-                <legend>Войдите в аккаунт</legend>
-                <Input onChange={e => setEmail(e.target.value)} value={email} type='email' placeholder='Почта' required>Почта</Input>
+                <legend>Регистрация</legend>
+                <Input onChange={e => setEmail(e.target.value.toString().toLowerCase())} value={email} type='email' placeholder='Почта' required>Почта</Input>
                 <Input onChange={e => setName(e.target.value)} value={name} type='text' placeholder='Имя' required>Имя</Input>
                 <Input onChange={e => setPassword(e.target.value)} value={password} type='password' placeholder='Пароль' required>Пароль</Input>
                 

@@ -17,8 +17,17 @@
   border-color: #bb2d3b;
 }
 
+#card {
+  height: 530px !important;
+
+}
+
 #img {
   border-radius: 5%;
+  max-width: 60%;
+  max-height: 50%;
+  position: relative !important;
+  top: 5px
 }
 
 #title {

@@ -4,10 +4,12 @@ import { Footer } from "../components/Footer/Footer";
 import { MainImg } from "../components/MainImg/MainImg";
 import { SidePanel } from "../components/SidePanel/SidePanel";
 import { footer, api } from "../components/information";
-import { eraseCookie, getCookie, setCookie } from "../utils/setCookies";
+import { getCookie, setCookie } from "../utils/setCookies";
 import { getFetch, postFetch } from "../utils/Fetch";
 import{ useRouter} from "next/router"
 import { Layout } from "../components/Layout/Layout";
+import crc32 from 'crc-32'
+
 export default function myRecommendation({data}) {
   const [content, setContent] = useState(data)
   const [info, setInfo] = useState(false);
@@ -50,7 +52,7 @@ export default function myRecommendation({data}) {
     <>
     {auth && (<Layout title="Рекомендации">
           <HeadRcm onClick={() => setInfo(true)} />
-          <MainImg content={content} updateContent={updateContent} email={email} />
+          <MainImg content={content} updateContent={updateContent} email={crc32.str(email).toString()} />
           {about && (
               <SidePanel content={footer.about}
               onClick={() => setAbout(false)}
