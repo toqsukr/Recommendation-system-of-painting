@@ -1,11 +1,12 @@
-import { useState, React, useEffect } from "react";
+import { useState, useEffect, React } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "./Gallery.module.css"
 import { Card } from "../Card/Card";
 
-export const Gallery = ({ fullContent, updateContent, updatePage, content }) => {
+export const Gallery = ({ data, fullContent, updateContent, updatePage, content }) => {
   const [loading, setLoading] = useState(true)
   if(loading) setTimeout(() => setLoading(false), 2800)
+
   return (
     <section
       className="py-5 text-center container"

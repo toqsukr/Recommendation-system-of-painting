@@ -7,25 +7,25 @@ export const Card = ({fullContent, updateContent, updatePage, data}, key) => {
   const [info, setInfo] = useState(false);
   const [isHidden, setIsHidden] = useState(false)
   async function deleteCard() {
-      setIsHidden(true)
-      updateContent(() => {
-        let newContent = [];
-        fullContent.forEach((el) => {
-          if (el.hex != data.hex) newContent.push(el);
-        });
-        updatePage(0);
-        return newContent;
+    setIsHidden(true)
+    updateContent(() => {
+      let newContent = [];
+      fullContent.forEach((el) => {
+        if (el.hex != data.hex) newContent.push(el);
       });
-      fetch(`${api.url}/user/collection`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        mode: "cors",
-        body: JSON.stringify({"hex": data.hex}),
-      }).then((e) => {
-        console.log(e)
-      })
+      updatePage(0);
+      return newContent;
+    });
+    fetch(`${api.url}/user/collection`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      mode: "cors",
+      body: JSON.stringify({"hex": data.hex}),
+    }).then((e) => {
+      console.log(e)
+    })
   }
   return (
     <>

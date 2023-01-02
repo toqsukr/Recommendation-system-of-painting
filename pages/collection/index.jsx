@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from "react";
 import useSWR from "swr"
-import { HeadCltn } from "../../components/Header/HeadCltn/HeadCltn";
 import { Footer } from "../../components/Footer/Footer";
-import { Gallery } from "../../components/Gallery/Gallery";
-import { SwitchBar } from "../../components/SwitchBar/SwitchBar";
-import { NotFound } from "../../components/NotFound/NotFound";
 import { SidePanel } from "../../components/SidePanel/SidePanel";
 import { getFetch, postFetch } from "../../utils/Fetch";
 import { getCookie, setCookie } from "../../utils/setCookies";
 import { useRouter } from "next/router"
-import {footer} from "../../components/information"
-import {api} from "../../components/information"
+import { footer } from "../../components/information"
+import { api } from "../../components/information"
 import "bootstrap/dist/css/bootstrap.css";
+import { Controle } from "../../components/ControleBar/Controle";
 
 
-export default function myCollection({pool}) {
-  const [page, setPage] = useState(0);
-  const [content, setContent] = useState(pool);
+export default function myCollection() {
   const [about, setAbout] = useState(false);
   const [auth, setAuth] = useState(false)
   const router = useRouter()
@@ -47,48 +42,22 @@ export default function myCollection({pool}) {
         }
       )
     }, [])
-    
-  const fullGallery = data;
-  const updatePage = (p) => setPage(p);
-  const updateContent = (p) => setContent(p);
 
+    
   return (
     <>
       <title>Моя коллекция</title>
       {auth && (
         <>
-          <HeadCltn
-            fullGallery={fullGallery}
-            updateContent={updateContent}
-            content={content}
-            updatePage={updatePage}
-          />
-          <div>
-            {content.length ? (
-              <Gallery fullContent={data} updateContent={updateContent} updatePage={updatePage} content={data?.slice(page * 6, (page + 1) * 6)} />
-            ) : (
-              <NotFound />
-            )}
-          </div>
+          <Controle data={data}/>
           {about && (
               <SidePanel content={footer.about}
               onClick={() => setAbout(false)}
               />
           )}
-        <SwitchBar content={content} page={page} updatePage={updatePage} />
         <Footer onClick={() => setAbout(true)}/>
       </>)}
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const response = await fetch(`${api.url}/user/collection`)
-  const obj = await response.json()
-  return {
-    props: {
-      pool: obj,
-    },
-  };
 }
 

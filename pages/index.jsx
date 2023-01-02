@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import useSWR from 'swr'
 import { HeadRcm } from "../components/Header/HeadRcm/HeadRcm";
 import { Footer } from "../components/Footer/Footer";
 import { MainImg } from "../components/MainImg/MainImg";
@@ -20,6 +21,11 @@ export default function myRecommendation({pool}) {
   const updateContent = (e) => setContent(e)
   const updateCltnInfo = (e) => setCltnInfo(e)
   const router = useRouter()
+
+  const { data } = useSWR(`${api.url}/user/rcmd`, async () => {
+    const response = await fetch(`${api.url}/user/rcmd`)
+    return await response.json()
+  })
   
     useEffect(() => {
     fetch(`${api.url}/user/collection`).then(
@@ -32,6 +38,7 @@ export default function myRecommendation({pool}) {
         })
       }
     )
+    
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
           res => {
             if(res["success"]) {
@@ -61,23 +68,23 @@ export default function myRecommendation({pool}) {
     <>
       <title>Рекомендации</title>
       {auth && (
-          <>
-            <HeadRcm onClick={() => setInfo(true)} />
-            <MainImg isUnique={isUnique} cltnInfo={cltnInfo} updateCltnInfo={updateCltnInfo} updateUnique={updateUnique} content={content} updateContent={updateContent} email={email} />
-            {about && (
-                <SidePanel content={footer.about}
-                onClick={() => setAbout(false)}
-                />
-              )}
-            {info && (
-              <SidePanel
-              content={content[0]}
-              onClick={() => setInfo(false)}
+        <>
+          <HeadRcm onClick={() => setInfo(true)} />
+          <MainImg isUnique={isUnique} cltnInfo={cltnInfo} updateCltnInfo={updateCltnInfo} updateUnique={updateUnique} content={data} email={email} />
+          {about && (
+              <SidePanel content={footer.about}
+              onClick={() => setAbout(false)}
               />
+            )}
+          {info && (
+            <SidePanel
+            content={data[0]}
+            onClick={() => setInfo(false)}
+            />
           )}
           <Footer onClick={() => setAbout(true)}/>
         </>
-    )}
+      )}
     </>
   );
 }

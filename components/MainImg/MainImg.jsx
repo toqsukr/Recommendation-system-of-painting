@@ -3,25 +3,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import {api} from "../information"
 import css from "./MainImg.module.css";
 import { postFetch } from "../../utils/Fetch";
-export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, updateContent, content, email}) => {
+export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, content, email}) => {
   const [exist, setExist] = useState(false)
   const [success, setSuccess] = useState(false)
   const [delay, setDelay] = useState(true)
-  const [update, setUpadte] = useState(false)
   const [loading, setLoading] = useState(true)
   if(loading) setTimeout(() => setLoading(false), 2800)
 
-  useEffect(() => {
-    if(update) {
-      fetch(`${api.url}/user/rcmd`).then(
-        res => {
-          return res.json()
-      }).then(res => {
-          if(res[0].hex != content[0].hex)  updateContent(res)
-          setUpadte(false)
-      })
-    }
-  })
   
   function handleLike(e) {
     e.preventDefault();
@@ -49,11 +37,10 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, upda
     } else {
       setExist(true)
     }
-
-    
   }
 
   function handleSwipe(value) {
+    setLoading(true)
     setExist(false)
     setSuccess(false)
     updateUnique(true)
@@ -68,9 +55,9 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, upda
         "hex": content[0].hex,
         "decision": value,
     }).then(
-        res => {
-          setUpadte(true)
-        }
+      res => {
+        setTimeout(async () => setLoading(false), 2500)
+      }
     )
   }    
   return (
@@ -83,7 +70,7 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, upda
           </div>
         </div>
       </div>
-    ) : (
+    ) : content && (
     <section id={css.section} className="container container-md container-sm container-centre py-5 text-center" >
           {!exist 
           ?

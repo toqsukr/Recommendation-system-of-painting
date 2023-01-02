@@ -26,5 +26,5 @@ export const footer = {
 };
 
 export const api = {
-  url: "https://api-for-r-sof-p69ijwchb-toqsukr.vercel.app"
+  url: "https://api-for-r-sof-p.vercel.app"
 }
