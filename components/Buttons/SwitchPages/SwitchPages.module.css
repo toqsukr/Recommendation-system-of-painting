@@ -3,16 +3,19 @@
   background-color: #ffffff;
   border-color: #e8e8e88d;
   color: rgb(131, 131, 131);
+  border-radius: 0;
+  font-weight: 500;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .btn_switch:hover {
-  background-color: #696969dd;
+  background-color: #bec2caa0;
   border-color: #e7e7e7;
   color: rgb(255, 255, 255);
 }
 
 .btn_switch:active {
   background-color: rgba(#198754, 1) !important;
-  border-color: #198754bd !important;
+  border-color: #8a8a8abd !important;
   color: rgb(216, 216, 216) !important;
 }

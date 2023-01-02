@@ -2,13 +2,12 @@ import {useState, React, useEffect} from 'react'
 import "bootstrap/dist/css/bootstrap.css";
 import { Input } from '../../components/Input/Input'
 import { Button } from '../../components/Buttons/Button/Button'
-import { getFetch, postFetch } from '../../utils/Fetch';
+import { postFetch } from '../../utils/Fetch';
 import { setCookie } from '../../utils/setCookies';
-import { Layout } from '../../components/Layout/Layout';
+import { getFetch } from '../../utils/Fetch';
+import { getCookie } from '../../utils/setCookies';
 import {useRouter} from "next/router"
-import { api } from '../../components/information';
 import Link from 'next/link'
-import crc32 from 'crc-32'
 import css from './SignIn.module.css'
 
 export default function SignIn() {
@@ -16,11 +15,18 @@ export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [correct, setCorrect] = useState(true)
-  const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(true)
   const router = useRouter();
+
   useEffect(() => {
-    router.prefetch('/')
+    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+        res => {
+        if(res["success"]) router.push('/')
+        else  setAuth(false)
+      }
+    )
   }, [])
+
   async function FormHandler(e) {
       e.preventDefault()
       postFetch("https://norma.nomoreparties.space/api/auth/login", {
@@ -29,17 +35,18 @@ export default function SignIn() {
       }).then(res => {
         if(!res["success"])   throw Error("Incorrect email or password!")
 
-        setCookie("accessToken", res.accessToken, 2);
-        setCookie("refreshToken", res.refreshToken);
-        setAuth(true)
+        setCookie("accessToken", res["accessToken"], 1);
+        setCookie("refreshToken", res["refreshToken"]);
         router.push("/")
       }).catch(() => {
         setCorrect(false)
       })
   }
   return (
-    <Layout title="Вход" onlyOnAuth={!auth}>
-      <div className={css.container}>
+    <>
+      <title>Регистрация</title>
+      {!auth && (
+        <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
             {!correct && (
@@ -49,15 +56,16 @@ export default function SignIn() {
               </div>
             </div>
             )}
-                <legend>Вход в аккаунт</legend>
-                <Input onChange={e => setEmail(e.target.value.toString().toLowerCase())} value={email} type='email' placeholder='Почта' required>Почта</Input>
-                <Input onChange={e => setPassword(e.target.value)} value={password} type='password' placeholder='Пароль' required>Пароль</Input>
-                
-            </fieldset>
-            <Button type="submit" className='btn btn-primary'>Войти</Button>
-            <Link id={css.to_registr} href="/register">Регистрация</Link>
-        </form>
-      </div>
-    </Layout>
+              <legend>Вход в аккаунт</legend>
+              <Input onChange={e => setEmail(e.target.value.toString().toLowerCase())} value={email} type='email' placeholder='Почта' required>Почта</Input>
+              <Input onChange={e => setPassword(e.target.value)} value={password} type='password' placeholder='Пароль' required>Пароль</Input>
+              
+          </fieldset>
+          <Button type="submit" className='btn btn-primary'>Войти</Button>
+          <Link id={css.to_registr} href="/register">Регистрация</Link>
+      </form>
+    </div>
+    )}
+  </>  
   )
 }

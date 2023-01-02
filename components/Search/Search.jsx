@@ -8,7 +8,7 @@ export const Search = ({
   updatePage,
   fullGallery,
 }) => {
-  let [title, setTitle] = useState("");
+  const [title, setTitle] = useState("");
   function handleClick(e) {
     e.preventDefault();
     updateContent(() => {

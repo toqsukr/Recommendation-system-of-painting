@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { SidePanel } from "../SidePanel/SidePanel";
-import {api} from "../information"
+import { api } from "../information"
 import css from "./Card.module.css"
-export const Card = ({ fullContent, content, updateContent, updatePage, data}, key) => {
+export const Card = ({fullContent, updateContent, updatePage, data}, key) => {
   const [info, setInfo] = useState(false);
-
+  const [isHidden, setIsHidden] = useState(false)
   async function deleteCard() {
+      setIsHidden(true)
       updateContent(() => {
         let newContent = [];
         fullContent.forEach((el) => {
@@ -16,11 +17,11 @@ export const Card = ({ fullContent, content, updateContent, updatePage, data}, k
         return newContent;
       });
       fetch(`${api.url}/user/collection`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json"
         },
         mode: "cors",
-        method: "DELETE",
         body: JSON.stringify({"hex": data.hex}),
       }).then((e) => {
         console.log(e)
@@ -28,7 +29,8 @@ export const Card = ({ fullContent, content, updateContent, updatePage, data}, k
   }
   return (
     <>
-        <div className="col">
+      {!isHidden &&
+      (<div className="col">
         <div className="card shadow-sm" id={css.card}>
           <div className="card-body"  >
             <div >
@@ -48,7 +50,9 @@ export const Card = ({ fullContent, content, updateContent, updatePage, data}, k
             </div>
           </div>
         </div>
-      </div>
+      </div>)
+      }
+        
     </>
   );
 };

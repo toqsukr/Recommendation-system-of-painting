@@ -7,65 +7,77 @@ import { footer, api } from "../components/information";
 import { getCookie, setCookie } from "../utils/setCookies";
 import { getFetch, postFetch } from "../utils/Fetch";
 import{ useRouter} from "next/router"
-import { Layout } from "../components/Layout/Layout";
-import crc32 from 'crc-32'
 
-export default function myRecommendation({data}) {
-  const [content, setContent] = useState(data)
+export default function myRecommendation({pool}) {
+  const [content, setContent] = useState(pool)
   const [info, setInfo] = useState(false);
   const [about, setAbout] = useState(false);
   const [email, setEmail] = useState('')
   const [auth, setAuth] = useState(false)
+  const [cltnInfo, setCltnInfo] = useState('')
+  const [isUnique, setUnique] = useState(true)
+  const updateUnique = (e) => setUnique(e)
   const updateContent = (e) => setContent(e)
+  const updateCltnInfo = (e) => setCltnInfo(e)
   const router = useRouter()
-    
+  
     useEffect(() => {
-    router.prefetch('/sign-in')
-    const sendUser = () => {
-        getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-          res => {
-              if(res.user) {
-                setEmail(res.user.email)
-                setAuth(true)
-              }
-          }
-      )
-    }
-
-    if(getCookie("refreshToken"))  {
-      if(!getCookie("accessToken")) {
-        postFetch("https://norma.nomoreparties.space/api/auth/token", {
-          token: getCookie("refreshToken"),
-        }).then(res => {
-          setCookie("accessToken", res.accessToken, 2);
-          setCookie("refreshToken", res.refreshToken);
-          console.log(res)
-          res["success"] ? setAuth(true) : router.push('/sign-in')
+    fetch(`${api.url}/user/collection`).then(
+      res => res.json()
+    ).then(
+      obj => {
+        setCltnInfo(obj)
+        obj.forEach((el) => {
+          if(el.src === content[0].src)   setUnique(false);
         })
-      } else {
-        sendUser()
       }
-    } else  router.push("/sign-in")
+    )
+    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+          res => {
+            if(res["success"]) {
+            setAuth(true)
+            setEmail(res.user.email)
+          } else {
+            postFetch("https://norma.nomoreparties.space/api/auth/token", {
+              token: getCookie("refreshToken"),
+            }).then(res => {
+              if(res["success"])
+              {
+                setAuth(true)
+                setCookie("accessToken", res["accessToken"], 1);
+                setCookie("refreshToken", res["refreshToken"]);
+                getFetch("https://norma.nomoreparties.space/api/auth/user", res["accessToken"]).then(
+                  res => setEmail(res.user.email)
+                )
+              }
+              else router.push('/sign-in')
+            })
+          }
+        }
+      )
   }, [])
 
   return (
     <>
-    {auth && (<Layout title="Рекомендации">
-          <HeadRcm onClick={() => setInfo(true)} />
-          <MainImg content={content} updateContent={updateContent} email={crc32.str(email).toString()} />
-          {about && (
-              <SidePanel content={footer.about}
-              onClick={() => setAbout(false)}
-              />
-            )}
-          {info && (
-            <SidePanel
-            content={content[0]}
-            onClick={() => setInfo(false)}
+      <title>Рекомендации</title>
+      {auth && (
+          <>
+            <HeadRcm onClick={() => setInfo(true)} />
+            <MainImg isUnique={isUnique} cltnInfo={cltnInfo} updateCltnInfo={updateCltnInfo} updateUnique={updateUnique} content={content} updateContent={updateContent} email={email} />
+            {about && (
+                <SidePanel content={footer.about}
+                onClick={() => setAbout(false)}
+                />
+              )}
+            {info && (
+              <SidePanel
+              content={content[0]}
+              onClick={() => setInfo(false)}
               />
           )}
           <Footer onClick={() => setAbout(true)}/>
-    </Layout>)}
+        </>
+    )}
     </>
   );
 }
@@ -76,7 +88,7 @@ export async function getServerSideProps(context) {
   );
   return {
     props: {
-      data: obj,
+      pool: obj,
     },
   };
 }

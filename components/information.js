@@ -26,5 +26,5 @@ export const footer = {
 };
 
 export const api = {
-  url: "https://326f-176-59-15-199.ngrok.io"
+  url: "https://api-for-r-sof-p69ijwchb-toqsukr.vercel.app"
 }
