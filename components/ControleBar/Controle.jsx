@@ -3,6 +3,7 @@ import { HeadCltn } from '../Header/HeadCltn/HeadCltn';
 import { Gallery } from '../Gallery/Gallery';
 import { NotFound } from '../NotFound/NotFound';
 import { SwitchBar } from '../SwitchBar/SwitchBar';
+import { Loading } from '../Loading/Loading';
 export const Controle = ({ data }) => {
 const [content, setContent] = useState(null)
 const [fullGallery, setFullGallery] = useState(null)
@@ -19,7 +20,6 @@ useEffect(() => {
   if(first)
   {
     setTimeout(async () => {
-      console.log(data)
       setFullGallery(data)
       setContent(data)
     }, 1000)
@@ -47,13 +47,7 @@ const updateLoading = (p) => setLoading(p)
         ) : (
             <NotFound />
         )) : (
-          <div style={{paddingTop: '220px', marginBottom: '220px'}} className="container container-sm container-md container-lg">
-                <div className="d-flex justify-content-center">
-                  <div className="spinner-border" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
-          </div>
+          <Loading/>
         )}
         </div>
         <SwitchBar content={content} page={page} updatePage={updatePage} />

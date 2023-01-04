@@ -2,13 +2,32 @@ import React, {useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {api} from "../information"
 import css from "./MainImg.module.css";
+import { Loading } from "../Loading/Loading";
 import { postFetch } from "../../utils/Fetch";
-export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, content, email}) => {
+export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique, cltnInfo, updateUnique, updateCltnInfo, content, email}) => {
   const [exist, setExist] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [isSwipe, setIsSwipe] = useState(false)
   const [delay, setDelay] = useState(true)
-  const [loading, setLoading] = useState(true)
-  if(loading) setTimeout(() => setLoading(false), 3000)
+  setTimeout(async () => updateLoading(false), 500)
+
+  useEffect(() => {
+    if(isSwipe) {
+      setIsSwipe(false)
+      setTimeout(() => {
+          fetch(`${api.url}/user/collection`).then(
+              res => res.json()
+          ).then(
+              obj => {
+                  updateCltnInfo(obj)
+                  obj.forEach((el) => {
+                      if(el.src === content[0].src)   updateUnique(false);
+                  })
+              })
+          }, 500)
+      setTimeout(async () => updateLoading(false), 1000)
+    }
+  })
 
   function handleLike(e) {
     e.preventDefault();
@@ -21,7 +40,7 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, cont
       setExist(false)
       setSuccess(true)
       updateUnique(false) 
-      let newCltnInfo = JSON.parse(JSON.stringify(cltnInfo))
+      let newCltnInfo = [JSON.parse(JSON.stringify(cltnInfo))]
       newCltnInfo.push(content[0])
       updateCltnInfo(newCltnInfo)
       postFetch(`${api.url}/user/collection`, 
@@ -39,15 +58,28 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, cont
   }
 
   function handleSwipe(value) {
-    setLoading(true)
+    fetch(`${api.url}/user/rcmd`, {
+      method: 'DELETE',
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body:  JSON.stringify({"src": content[0].src}),
+    }).then(res => res.json()).then(res => console.log(res))
+
+    setIsSwipe(true)
     setExist(false)
     setSuccess(false)
     updateUnique(true)
-    if(!delay)  return
-    setDelay(false)
-    setTimeout(async () => {
-      setDelay(true)
-    }, 700)
+    
+    updateLoading(true)
+    
+    updateContent(() => {
+      let newContent = []
+      data.forEach((el) => {
+        if (el && el.hex != content[0].hex && !(el in content))    newContent.push(el);
+      })
+      return newContent
+    })
     postFetch(`${api.url}/user/decision`, {
         "userID": email,
         "imgName": content[0].title,
@@ -55,21 +87,13 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, cont
         "decision": value,
     }).then(
       res => {
-        setTimeout(async () => setLoading(false), 2500)
+        console.log(res)
       }
     )
   }    
   return (
     <>
-    {loading ? (
-      <div style={{paddingTop: '300px', paddingBottom: '300px'}} className="container container-sm container-md container-lg">
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </div>
-    ) : content && (
+    { !loading ? content && (
     <section id={css.section} className="container container-md container-sm container-centre py-5 text-center" >
           {!exist 
           ?
@@ -113,7 +137,7 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, cont
             </div>
           </div>
       </section>
-      )}
+      ) : (<Loading/>)}
     </>
   );
 };

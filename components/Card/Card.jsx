@@ -3,14 +3,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import { SidePanel } from "../SidePanel/SidePanel";
 import { api } from "../information"
 import css from "./Card.module.css"
-export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateContent, updatePage, data}, key) => {
+export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateContent, data}, key) => {
   const [info, setInfo] = useState(false);
   async function deleteCard() {
     updateIsDeleted(true)
-      let newContent = [];
-      fullContent.forEach((el) => {
-        if (el.hex != data.hex) newContent.push(el);
-      });
+    let newContent = [];
+    fullContent.forEach((el) => {
+      if (el.hex != data.hex) newContent.push(el);
+    });
     updateContent(newContent)
     updateFullGallery(newContent)
     fetch(`${api.url}/user/collection`, {
@@ -31,7 +31,7 @@ export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateCo
           <div className="card-body"  >
             <div >
               <a href={data.src} target='_blank'>
-              <img className="border border-3" id={css.img} key={data.hex} src={data.src} alt="Изображение" />
+              <img className="border border-3" id={css.img} key={key} src={data.src} alt="Изображение" />
               </a>
             <p
               className="card-text"

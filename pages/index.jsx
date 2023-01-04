@@ -2,24 +2,22 @@ import React, { useState, useEffect } from "react";
 import useSWR from 'swr'
 import { HeadRcm } from "../components/Header/HeadRcm/HeadRcm";
 import { Footer } from "../components/Footer/Footer";
-import { MainImg } from "../components/MainImg/MainImg";
-import { SidePanel } from "../components/SidePanel/SidePanel";
 import { footer, api } from "../components/information";
 import { getCookie, setCookie } from "../utils/setCookies";
 import { getFetch, postFetch } from "../utils/Fetch";
-import{ useRouter} from "next/router"
+import { RcmdBody } from "../components/RcmdBody/RcmdBody";
+import{ useRouter } from "next/router"
 
-export default function myRecommendation({pool}) {
-  const [content, setContent] = useState(pool)
-  const [info, setInfo] = useState(false);
-  const [about, setAbout] = useState(false);
-  const [email, setEmail] = useState('')
+export default function myRecommendation() {
   const [auth, setAuth] = useState(false)
+  const [about, setAbout] = useState(false);
+  const [info, setInfo] = useState(false);
+  const [email, setEmail] = useState('')
+  
   const [cltnInfo, setCltnInfo] = useState('')
-  const [isUnique, setUnique] = useState(true)
-  const updateUnique = (e) => setUnique(e)
-  const updateContent = (e) => setContent(e)
   const updateCltnInfo = (e) => setCltnInfo(e)
+  const updateInfo = (e) => setInfo(e)
+
   const router = useRouter()
 
   const { data } = useSWR(`${api.url}/user/rcmd`, async () => {
@@ -27,20 +25,7 @@ export default function myRecommendation({pool}) {
     return await response.json()
   })
   
-    useEffect(() => {
-      setTimeout(() => {
-        fetch(`${api.url}/user/collection`).then(
-          res => res.json()
-        ).then(
-          obj => {
-            setCltnInfo(obj)
-            obj.forEach((el) => {
-              if(el.src === content[0].src)   setUnique(false);
-            })
-          }, 900)
-        }
-     )
-    
+    useEffect(() => {    
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
           res => {
             if(res["success"]) {
@@ -72,32 +57,10 @@ export default function myRecommendation({pool}) {
       {auth && (
         <>
           <HeadRcm onClick={() => setInfo(true)} />
-          <MainImg isUnique={isUnique} cltnInfo={cltnInfo} updateCltnInfo={updateCltnInfo} updateUnique={updateUnique} content={data} email={email} />
-          {about && (
-              <SidePanel content={footer.about}
-              onClick={() => setAbout(false)}
-              />
-            )}
-          {info && (
-            <SidePanel
-            content={data[0]}
-            onClick={() => setInfo(false)}
-            />
-          )}
+          <RcmdBody email={email} cltnInfo={cltnInfo} updateInfo={updateInfo} updateCltnInfo={updateCltnInfo} about={about} info={info} footer={footer} data={data}/>
           <Footer onClick={() => setAbout(true)}/>
         </>
       )}
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const obj = await fetch(`${api.url}/user/rcmd`).then(
-    (res) => res.json()
-  );
-  return {
-    props: {
-      pool: obj,
-    },
-  };
 }
