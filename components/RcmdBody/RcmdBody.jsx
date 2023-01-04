@@ -4,7 +4,7 @@ import { SidePanel } from '../SidePanel/SidePanel'
 import { Loading } from '../Loading/Loading'
 import { api } from '../information'
 
-export const RcmdBody = ({ email, cltnInfo, updateInfo, updateCltnInfo, info, footer, data, about}) => {
+export const RcmdBody = ({ updateAbout, email, cltnInfo, updateInfo, updateCltnInfo, info, footer, data, about}) => {
     const [isUnique, setUnique] = useState(true)
     const [content, setContent] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -40,7 +40,7 @@ export const RcmdBody = ({ email, cltnInfo, updateInfo, updateCltnInfo, info, fo
             <MainImg loading={loading} data={data} updateContent={updateContent} updateLoading={updateLoading} isUnique={isUnique} cltnInfo={cltnInfo} updateCltnInfo={updateCltnInfo} updateUnique={updateUnique} content={content} email={email} />
             {about && (
                 <SidePanel content={footer.about}
-                onClick={() => setAbout(false)}
+                onClick={() => updateAbout(false)}
                 />
                 )}
             {info && (

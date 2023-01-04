@@ -1,8 +1,8 @@
-import { useEffect, React } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import css from "./footer.module.css";
 import { footer } from "../information";
-import { eraseCookie, getCookie, setCookie } from "../../utils/setCookies";
+import { eraseCookie, getCookie} from "../../utils/setCookies";
 import { useRouter } from "next/router";
 import { postFetch } from "../../utils/Fetch";
 export const Footer = ({onClick}) => {

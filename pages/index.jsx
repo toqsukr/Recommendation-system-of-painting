@@ -17,6 +17,7 @@ export default function myRecommendation() {
   const [cltnInfo, setCltnInfo] = useState('')
   const updateCltnInfo = (e) => setCltnInfo(e)
   const updateInfo = (e) => setInfo(e)
+  const updateAbout = (e) => setAbout(e)
 
   const router = useRouter()
 
@@ -57,7 +58,7 @@ export default function myRecommendation() {
       {auth && (
         <>
           <HeadRcm onClick={() => setInfo(true)} />
-          <RcmdBody email={email} cltnInfo={cltnInfo} updateInfo={updateInfo} updateCltnInfo={updateCltnInfo} about={about} info={info} footer={footer} data={data}/>
+          <RcmdBody updateAbout={updateAbout} email={email} cltnInfo={cltnInfo} updateInfo={updateInfo} updateCltnInfo={updateCltnInfo} about={about} info={info} footer={footer} data={data}/>
           <Footer onClick={() => setAbout(true)}/>
         </>
       )}
