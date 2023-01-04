@@ -18,6 +18,7 @@ export const Search = ({
         : fullGallery.forEach((el) => {
             if (el.title.toLowerCase().includes(title.toLowerCase())) newContent.push(el);
           });
+      
       updatePage(0);
       return newContent;
     });

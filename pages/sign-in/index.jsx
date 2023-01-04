@@ -44,7 +44,7 @@ export default function SignIn() {
   }
   return (
     <>
-      <title>Регистрация</title>
+      <title>Вход в аккаунт</title>
       {!auth && (
         <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>

@@ -6,12 +6,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import css from "../header.module.css";
 
 export const HeadCltn = ({
+  loading,
   content,
   updateContent,
   updatePage,
   fullGallery,
 }) => {
-
+  
   return (
     <div id={css.header_fixed}>
       <nav className={`navbar navbar-expand-lg bg-dark`} id={css.header}>
@@ -19,14 +20,14 @@ export const HeadCltn = ({
           <div className="header">
             <BtnHead path="/">{collection.rcmd.name}</BtnHead>
           </div>
-          <Search
+          {!loading && (<Search
             fullGallery={fullGallery}
             updateContent={updateContent}
             updatePage={updatePage}
             content={content}
           >
             {collection.search}
-          </Search>
+          </Search>)}
         </div>
       </nav>
     </div>

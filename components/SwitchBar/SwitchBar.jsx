@@ -6,7 +6,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
   return (
     <nav aria-label="Page navigation example">
       <ul className="pagination justify-content-center">
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 && (
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"
@@ -19,7 +19,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </li>
         )}
 
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 &&
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 &&
           (page === 0 ? (
             <li className="page-item active">
               <span className="page-link">1</span>
@@ -56,7 +56,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 && page != 0 && page != Math.ceil(content.length / 6) - 1 && (
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 && page != 0 && page != Math.ceil(content.length / 6) - 1 && (
           <>
             <li className="page-item active">
               <span className="page-link">{page + 1}</span>
@@ -64,7 +64,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 && page < Math.ceil(content.length / 6) - 2 && (
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 && page < Math.ceil(content.length / 6) - 2 && (
           <>
             <li className="page-item">
               <ToPage
@@ -78,13 +78,13 @@ export const SwitchBar = ({ updatePage, page, content }) => {
           </>
         )}
 
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 && page < Math.ceil(content.length / 6) - 3 && (
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 && page < Math.ceil(content.length / 6) - 3 && (
           <li>
             <span className="page-link">...</span>
           </li>
         )}
 
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 &&
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 &&
           (page === Math.ceil(content.length / 6) - 1 ? (
             <li className="page-item active">
               <span className="page-link">{Math.ceil(content.length / 6)}</span>
@@ -98,7 +98,7 @@ export const SwitchBar = ({ updatePage, page, content }) => {
               </ToPage>
             </li>
           ))}
-        {content.length != 0 && Math.ceil(content.length / 6) != 1 && (
+        {content && content.length != 0 && Math.ceil(content.length / 6) != 1 && (
           <li className="page-item">
             <SwitchPages
               className="page-link"

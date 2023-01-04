@@ -16,10 +16,6 @@ export default function myCollection() {
   const [auth, setAuth] = useState(false)
   const router = useRouter()
 
-  const { data } = useSWR(`${api.url}/user/collection`, async () => {
-    const response = await fetch(`${api.url}/user/collection`)
-    return await response.json()
-  })
   
   useEffect(() => {
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
@@ -40,10 +36,14 @@ export default function myCollection() {
             })
           }
         }
-      )
-    }, [])
-
-    
+        )
+      }, [])
+      const { data } = useSWR(`${api.url}/user/collection`, async () => {
+        const response = await fetch(`${api.url}/user/collection`)
+        return await response.json()
+      })
+      
+      
   return (
     <>
       <title>Моя коллекция</title>

@@ -3,19 +3,16 @@ import "bootstrap/dist/css/bootstrap.css";
 import { SidePanel } from "../SidePanel/SidePanel";
 import { api } from "../information"
 import css from "./Card.module.css"
-export const Card = ({fullContent, updateContent, updatePage, data}, key) => {
+export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateContent, updatePage, data}, key) => {
   const [info, setInfo] = useState(false);
-  const [isHidden, setIsHidden] = useState(false)
   async function deleteCard() {
-    setIsHidden(true)
-    updateContent(() => {
+    updateIsDeleted(true)
       let newContent = [];
       fullContent.forEach((el) => {
         if (el.hex != data.hex) newContent.push(el);
       });
-      updatePage(0);
-      return newContent;
-    });
+    updateContent(newContent)
+    updateFullGallery(newContent)
     fetch(`${api.url}/user/collection`, {
       method: "DELETE",
       headers: {
@@ -29,8 +26,7 @@ export const Card = ({fullContent, updateContent, updatePage, data}, key) => {
   }
   return (
     <>
-      {!isHidden &&
-      (<div className="col">
+      <div className="col">
         <div className="card shadow-sm" id={css.card}>
           <div className="card-body"  >
             <div >
@@ -50,8 +46,7 @@ export const Card = ({fullContent, updateContent, updatePage, data}, key) => {
             </div>
           </div>
         </div>
-      </div>)
-      }
+      </div>
         
     </>
   );

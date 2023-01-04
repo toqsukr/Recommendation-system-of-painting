@@ -8,9 +8,8 @@ export const MainImg = ({ isUnique, cltnInfo, updateUnique, updateCltnInfo, cont
   const [success, setSuccess] = useState(false)
   const [delay, setDelay] = useState(true)
   const [loading, setLoading] = useState(true)
-  if(loading) setTimeout(() => setLoading(false), 2800)
+  if(loading) setTimeout(() => setLoading(false), 3000)
 
-  
   function handleLike(e) {
     e.preventDefault();
     if(!delay)  return

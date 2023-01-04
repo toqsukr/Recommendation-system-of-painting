@@ -28,16 +28,18 @@ export default function myRecommendation({pool}) {
   })
   
     useEffect(() => {
-    fetch(`${api.url}/user/collection`).then(
-      res => res.json()
-    ).then(
-      obj => {
-        setCltnInfo(obj)
-        obj.forEach((el) => {
-          if(el.src === content[0].src)   setUnique(false);
-        })
-      }
-    )
+      setTimeout(() => {
+        fetch(`${api.url}/user/collection`).then(
+          res => res.json()
+        ).then(
+          obj => {
+            setCltnInfo(obj)
+            obj.forEach((el) => {
+              if(el.src === content[0].src)   setUnique(false);
+            })
+          }, 900)
+        }
+     )
     
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
           res => {
