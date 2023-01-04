@@ -27,16 +27,14 @@ export default function register() {
       )
     }, [])
 
-    function FormHandler(e) {
+    async function FormHandler(e) {
       e.preventDefault()
       postFetch("https://norma.nomoreparties.space/api/auth/register", {
-          email,
-          password,
-          name,
+          email: email,
+          password: password,
+          name: name,
       }).then(res => {
-        getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-        obj => {
-          if(!obj["success"]) throw Error("Same email has already exist!")
+          if(!res["success"])  throw Error("This email has already exist!")
           setCookie("accessToken", res["accessToken"], 1);
           setCookie("refreshToken", res["refreshToken"])
           postFetch(`${api.url}/user/userID`, {
@@ -45,7 +43,6 @@ export default function register() {
           router.push("/")
         }).catch(() => {
           setCorrect(false)
-        })
       })
     }
     
