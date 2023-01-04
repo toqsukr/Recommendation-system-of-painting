@@ -6,7 +6,7 @@ import { getFetch, postFetch } from '../../utils/Fetch';
 import { getCookie, setCookie } from '../../utils/setCookies';
 import {useRouter} from 'next/router';
 import { api } from '../../components/information';
-import crc32 from "crc32"
+import crc32 from "crc-32"
 import Link from 'next/link';
 import css from './register.module.css'
 

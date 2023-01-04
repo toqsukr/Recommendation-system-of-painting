@@ -7,7 +7,7 @@ import { setCookie } from '../../utils/setCookies';
 import { getCookie } from '../../utils/setCookies';
 import { api } from '../../components/information';
 import {useRouter} from "next/router"
-import crc32 from 'crc32'
+import crc32 from 'crc-32'
 import Link from 'next/link'
 import css from './SignIn.module.css'
 
