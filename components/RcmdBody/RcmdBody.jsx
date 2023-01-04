@@ -13,6 +13,7 @@ export const RcmdBody = ({ updateAbout, email, cltnInfo, updateInfo, updateCltnI
     const updateUnique = (e) => setUnique(e)
     const updateContent = (e) => setContent(e)
     const updateLoading = (e) => setLoading(e)
+
     useEffect(() => {
         setTimeout(() => setFirst(true), 300)
     }, [])

@@ -9,7 +9,8 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
   const [success, setSuccess] = useState(false)
   const [isSwipe, setIsSwipe] = useState(false)
   const [delay, setDelay] = useState(true)
-  setTimeout(async () => updateLoading(false), 500)
+  const [preLastHex, setPreLastHex] = useState([])
+  setTimeout(async () => updateLoading(false), 700)
 
   useEffect(() => {
     if(isSwipe) {
@@ -25,7 +26,7 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
                   })
               })
           }, 500)
-      setTimeout(async () => updateLoading(false), 800)
+      setTimeout(async () => updateLoading(false), 1000)
     }
   })
 
@@ -58,6 +59,12 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
   }
 
   function handleSwipe(value) {
+    updateLoading(true)
+    setIsSwipe(true)
+    setExist(false)
+    setSuccess(false)
+    updateUnique(true)
+
     fetch(`${api.url}/user/rcmd`, {
       method: 'DELETE',
       headers: {
@@ -66,20 +73,24 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
       body:  JSON.stringify({"src": content[0].src}),
     }).then(res => res.json()).then(res => console.log(res))
 
-    setIsSwipe(true)
-    setExist(false)
-    setSuccess(false)
-    updateUnique(true)
-    
-    updateLoading(true)
-    
     updateContent(() => {
       let newContent = []
       data.forEach((el) => {
-        if (el && el.hex != content[0].hex && !(el in content))    newContent.push(el);
+        el && el.hex != content[0].hex && !(preLastHex.includes(el.hex)) ? newContent.push(el) : console.log(el);
       })
+      console.log("NEW content")
+      console.log(newContent)
       return newContent
     })
+
+    setPreLastHex(() => {
+      const newPreLastHex = []
+      preLastHex.forEach((el) => newPreLastHex.push(el))
+      newPreLastHex.push(content[0].hex)
+      return newPreLastHex
+    })
+
+    console.log(preLastHex)
     postFetch(`${api.url}/user/decision`, {
         "userID": email,
         "imgName": content[0].title,
