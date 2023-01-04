@@ -8,7 +8,7 @@ import { useRouter } from "next/router"
 import { footer } from "../../components/information"
 import { api } from "../../components/information"
 import "bootstrap/dist/css/bootstrap.css";
-import { Controle } from "../../components/ControleBar/Controle";
+import { Controle } from "../../components/Controle/Controle";
 
 
 export default function myCollection() {

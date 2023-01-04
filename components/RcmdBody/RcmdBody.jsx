@@ -14,7 +14,7 @@ export const RcmdBody = ({ email, cltnInfo, updateInfo, updateCltnInfo, info, fo
     const updateContent = (e) => setContent(e)
     const updateLoading = (e) => setLoading(e)
     useEffect(() => {
-        setTimeout(() => setFirst(true), 500)
+        setTimeout(() => setFirst(true), 300)
     }, [])
     useEffect(() => {
         if(first) {
@@ -29,7 +29,7 @@ export const RcmdBody = ({ email, cltnInfo, updateInfo, updateCltnInfo, info, fo
                         obj.forEach((el) => {
                             if(data && data.length != 0 && el.src === data[0].src)   setUnique(false);
                         })
-                    }, 700)
+                    }, 500)
             })
         }
     })

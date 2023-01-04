@@ -25,7 +25,7 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
                   })
               })
           }, 500)
-      setTimeout(async () => updateLoading(false), 1000)
+      setTimeout(async () => updateLoading(false), 800)
     }
   })
 
