@@ -2,11 +2,12 @@ import {useState, React, useEffect} from 'react'
 import "bootstrap/dist/css/bootstrap.css";
 import { Input } from '../../components/Input/Input'
 import { Button } from '../../components/Buttons/Button/Button'
-import { postFetch } from '../../utils/Fetch';
+import { getFetch, postFetch } from '../../utils/Fetch';
 import { setCookie } from '../../utils/setCookies';
-import { getFetch } from '../../utils/Fetch';
 import { getCookie } from '../../utils/setCookies';
+import { api } from '../../components/information';
 import {useRouter} from "next/router"
+import crc32 from 'crc32'
 import Link from 'next/link'
 import css from './SignIn.module.css'
 
@@ -34,9 +35,11 @@ export default function SignIn() {
           password,
       }).then(res => {
         if(!res["success"])   throw Error("Incorrect email or password!")
-
         setCookie("accessToken", res["accessToken"], 1);
         setCookie("refreshToken", res["refreshToken"]);
+        postFetch(`${api.url}/user/userID`, {
+          userID: crc32.str(email, crc32).toString(),
+        }).then(res => console.log(res))
         router.push("/")
       }).catch(() => {
         setCorrect(false)

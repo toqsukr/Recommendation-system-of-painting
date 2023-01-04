@@ -5,6 +5,8 @@ import { Button } from '../../components/Buttons/Button/Button'
 import { getFetch, postFetch } from '../../utils/Fetch';
 import { getCookie, setCookie } from '../../utils/setCookies';
 import {useRouter} from 'next/router';
+import { api } from '../../components/information';
+import crc32 from "crc32"
 import Link from 'next/link';
 import css from './register.module.css'
 
@@ -37,6 +39,9 @@ export default function register() {
           if(!obj["success"]) throw Error("Same email has already exist!")
           setCookie("accessToken", res["accessToken"], 1);
           setCookie("refreshToken", res["refreshToken"])
+          postFetch(`${api.url}/user/userID`, {
+            userID: crc32.str(email, crc32).toString(),
+          }).then(res => console.log(res))
           router.push("/")
         }).catch(() => {
           setCorrect(false)

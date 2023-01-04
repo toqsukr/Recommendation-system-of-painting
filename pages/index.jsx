@@ -13,6 +13,7 @@ export default function myRecommendation() {
   const [about, setAbout] = useState(false);
   const [info, setInfo] = useState(false);
   const [email, setEmail] = useState('')
+  const [userID, setUserID] = useState('')
   
   const [cltnInfo, setCltnInfo] = useState('')
   const updateCltnInfo = (e) => setCltnInfo(e)
@@ -21,13 +22,13 @@ export default function myRecommendation() {
 
   const router = useRouter()
 
-  const { data } = useSWR(`${api.url}/user/rcmd`, async () => {
+  const { data } = useSWR(`${api.url}/user/${userID}`, async () => {
     const response = await fetch(`${api.url}/user/rcmd`)
     return await response.json()
   })
   
-    useEffect(() => {    
-    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+    useEffect(() => {
+      getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
           res => {
             if(res["success"]) {
             setAuth(true)
