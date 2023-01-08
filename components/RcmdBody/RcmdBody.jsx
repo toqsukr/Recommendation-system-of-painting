@@ -3,6 +3,8 @@ import { MainImg } from '../MainImg/MainImg'
 import { SidePanel } from '../SidePanel/SidePanel'
 import { Loading } from '../Loading/Loading'
 import { api } from '../information'
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import css from "./RcmdBody.module.css"
 
 export const RcmdBody = ({ updateAbout, email, cltnInfo, updateInfo, updateCltnInfo, info, footer, data, about}) => {
     const [isUnique, setUnique] = useState(true)
@@ -44,11 +46,18 @@ export const RcmdBody = ({ updateAbout, email, cltnInfo, updateInfo, updateCltnI
                 onClick={() => updateAbout(false)}
                 />
                 )}
-            {info && (
-                <SidePanel
-                content={content[0]}
-                onClick={() => updateInfo(false)}
-                />
+            {info &&
+            (
+                <SwitchTransition>
+                    <CSSTransition in={info} timeout={300} classNames={{ ...css }}>
+                        <div className={css.container_info_open}>
+                            <SidePanel
+                            content={content[0]}
+                            onClick={() => updateInfo(false)}
+                            />
+                        </div>
+                    </CSSTransition>
+                </SwitchTransition>
             )}
         </div>
         )}

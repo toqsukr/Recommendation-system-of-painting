@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { SidePanel } from "../SidePanel/SidePanel";
 import { api } from "../information"
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import css from "./Card.module.css"
 export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateContent, data}, key) => {
   const [info, setInfo] = useState(false);
@@ -41,7 +42,13 @@ export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateCo
             </p>
             <button onClick={deleteCard} type="button" className="btn btn-danger" id={css.delete}>Удалить из коллекции</button>
                 {info && (
-                  <SidePanel onClick={() => setInfo(false)} content={data} />
+                  <SwitchTransition>
+                    <CSSTransition in={info} timeout={500} classNames={{ ...css }}>
+                      <div className={css.container_info}>
+                        <SidePanel onClick={() => setInfo(false)} content={data} />
+                      </div>
+                    </CSSTransition>
+                  </SwitchTransition>
                 )}
             </div>
           </div>

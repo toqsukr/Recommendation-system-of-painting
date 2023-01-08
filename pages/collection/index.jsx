@@ -19,29 +19,31 @@ export default function myCollection() {
   
   useEffect(() => {
     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-      res => {
-            if(res["success"]) {
-            setAuth(true)
-          } else {
-            postFetch("https://norma.nomoreparties.space/api/auth/token", {
-              token: getCookie("refreshToken"),
-            }).then(res => {
-              if(res["success"])
-              {
+          res => {
+                if(res["success"]) {
                 setAuth(true)
-                setCookie("accessToken", res["accessToken"], 1);
-                setCookie("refreshToken", res["refreshToken"]);
-              }
-              else router.push('/sign-in')
-            })
+              } else {
+                postFetch("https://norma.nomoreparties.space/api/auth/token", {
+                  token: getCookie("refreshToken"),
+                }).then(res => {
+                  if(res["success"])
+                  {
+                    setAuth(true)
+                    setCookie("accessToken", res["accessToken"], 1);
+                    setCookie("refreshToken", res["refreshToken"]);
+                  }
+                  else router.push('/sign-in')
+                }
+              )
+            }
           }
-        }
         )
       }, [])
-      const { data } = useSWR(`${api.url}/user/collection`, async () => {
-        const response = await fetch(`${api.url}/user/collection`)
-        return await response.json()
-      })
+    
+  const { data } = useSWR(`${api.url}/user/collection`, async () => {
+    const response = await fetch(`${api.url}/user/collection`)
+    return await response.json()
+  })
       
       
   return (

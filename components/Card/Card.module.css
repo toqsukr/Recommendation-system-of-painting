@@ -37,3 +37,26 @@
 #title:hover {
   text-decoration-line:underline
 }
+
+.container_info {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 51;
+  animation: show-info 0.7s forwards;
+}
+
+@keyframes show-info {
+  0% {
+    opacity: 0;
+    transform: translateY(-200px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
