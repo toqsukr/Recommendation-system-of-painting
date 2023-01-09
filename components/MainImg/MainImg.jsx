@@ -137,10 +137,13 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
                   </a>
                 </div>
                     <button
-
                     className="carousel-control-prev"
                     id={css.mainbtnleft}
                     type="button"
+                    onClick={() =>{
+                      handleSwipe(-1)
+                    }
+                  } 
                     >
                       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACeklEQVR4nO2ZW4hNYRTHf8ckl4OYBhnNA1EiMSWXEPGqpMwTXkQeqPEml1cP8kAUNcqUFw/yQim5TJEHiqLcokQujftlNHIbffXf+prO2bvjrL3P/rJ/9dXp7NX6f2vv9a2z9jpQUFBQEMNKoAu4D/QBA4arD7gKrANKpMQ0oMd443GrO40gFgNvJdAL7AHmAmVjnUnAFuCjtNxn0ycRBXEKGE36rJXeY0unPV4QqeXtIEZKsx/Dgx2lUxZPImK+dF1BMaFLDt2ZyJLj0r0FTLRw+EAO55At64Gv0n4CTK7X4Wc5yzKtItqAO1alOKrpjWKW9J+FHsh46X8JOZASsF/6l0MO5Iy0vwGLQg7ktle1mkMOpAW4Kf1DoR/2BdJ/Hnogzd57StCBbJP+jXod/ZSjJrJlGHAE+CX9jnod9spRK9my1EupTRYOL1jdkRqZLV3XtJqwXQ4vki3jrA65XzU+yOkasmO6ND9ZOt0qp681HPhXyrrTcasNWA3ck+YJ6+btnJdiQxLsNwDfDcZBd4EJGOMcvpLAzgTbzoQB3PuY9RK4BuxIYdT0l+Wq6z8SutExyu3fwExyyj7d2afK6WoclN0xcspQ4Lo2eTLGboq6gv408tyKqUodF8zGGLvTstlNjunwDu+MKjbLZPNCTzK3dGujbmQzPOEtL+sWpybKGmkO6HBXYrOuXyHntGs44ErtqirD6HcNmlbWTKfXwrTGlOLD5JwScFabvVShhZmnaw8JgBZVJ7fhXYOujbL+ryNtVngtzELv+yVp/PuUNnu934529VrRRN2NP4OhCThfoet9lNCb5ZIRwAHgjZ7MUWBsozdVUPA/8wdFzgR0YTyMcAAAAABJRU5ErkJggg=="/>
                     </button>
@@ -148,6 +151,10 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
                     className="carousel-control-next"
                     id={css.mainbtnright}
                     type="button"
+                    onClick={() =>{
+                      handleSwipe(1)
+                    }
+                  } 
                     >
                       <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAChUlEQVR4nO2ZTYhOURjHf0MThqF3ehuNogwLRA0Ln6kxaykLspiVBQsKS8LOQiiKwmIUC6uxoCzMjJSFpKZMYaYxChn5DEO+BtOp/1untzv3feuee95zdX91Nvec/s/z3HvPOc95DuTk5NSCGcBp4D0wCpwHCmSMqcAt4F9ZGwaayBDH5PgroA1YCjzUs5NkhA7gD/AbWGs936BARsgARX0F4/Chsr5Zev6dwKkDbsjZPmBKWX+b+oYInH1y9C0wL6L/lPrPEjArgR/AX2BzRH8D8EGBrCJQZgJP5KTZN6LYpf67BMwlOTkATJ9kTGnp3U6gbJODX4Elk4xpt/aUegKkFfgsJ3fGjOvWmMMESD1wXw5ejRm3EBjX3tFMgBxXEM8rJIJnNO4iAdJupSDrYsbN1q9nluRlBEYz8Fpv+WCVG2RUM4vDx5g2CtxTmmNSG+cpyE050huRgpTTCfyKCaba9hiY6zKQPVYK0pJwAy1UaPOBLcAj2bziKghzGPok0a34Y7FsmrnmhAMS7MEvBWtOOaFHgmYn98kK2R10JfhGglHpeZpstL7IbheC4xI0RQWfTAPOWfYTJ52lpbBW7JX9B1kPpMnVpK91IGtk/2WWAykC/bJvktDMBjIg289clFxrGch12f5ZIdsOPpA64ITs3876ZC/+L6vWctl/kVToi4Qa8c8Ca8J3JRUblJCp3/qkE/hmrVqJc70LEjuCX7pkt99VFabDOh2aooIvVsuuKck6o0+i3VWc113RkMadyiJdbBrha8Ac/JVkn7oWXm8F8w44qmsC1yWbFh2kSiXZ/aRU8+11UOaptl1O+1fepLtzU3cac+z8GHAH2JFmADk5OWSTCQIHBIvH/7mJAAAAAElFTkSuQmCC"/>
                     </button>
