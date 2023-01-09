@@ -28,6 +28,7 @@ export const Gallery = ({ loading, updateLoading, updateFullGallery, fullContent
       <div
         className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id={css.container}
       >
+        
         {!loading ? content && content.map((el) => (
         <Card key={el.hex} updateFullGallery={updateFullGallery} updateIsDeleted={updateIsDeleted} fullContent={fullContent} updateContent={updateContent} updatePage={updatePage} data={el}/>
         )) : (

@@ -13,7 +13,7 @@ const [loading, setLoading] = useState(true)
 
 
 useEffect(() => {
-  setTimeout(() => setFirst(true), 800)
+  setTimeout(() => setFirst(true), 500)
 }, [])
 
 useEffect(() => {

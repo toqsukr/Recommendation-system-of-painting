@@ -35,6 +35,7 @@ export default function register() {
           password: password,
           name: name,
       }).then(res => {
+          console.log(res)
           if(!res["success"])  throw Error("This email has already exist!")
           setCookie("accessToken", res["accessToken"], 1);
           setCookie("refreshToken", res["refreshToken"])

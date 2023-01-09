@@ -35,26 +35,20 @@ export const Card = ({ updateFullGallery, updateIsDeleted, fullContent, updateCo
               <img className="border border-3" id={css.img} key={key} src={data.src} alt="Изображение" />
               </a>
             <p
-              className="card-text"
-              
+              className="card-text" 
             >
               <a id={css.title} type="button" onClick={() => setInfo(true)}>{data.title}</a>
             </p>
             <button onClick={deleteCard} type="button" className="btn btn-danger" id={css.delete}>Удалить из коллекции</button>
                 {info && (
-                  <SwitchTransition>
-                    <CSSTransition in={info} timeout={500} classNames={{ ...css }}>
-                      <div className={css.container_info}>
-                        <SidePanel onClick={() => setInfo(false)} content={data} />
-                      </div>
-                    </CSSTransition>
-                  </SwitchTransition>
+                  <div className={css.container_info}>
+                    <SidePanel onClick={() => setInfo(false)} content={data} />
+                  </div>
                 )}
             </div>
           </div>
         </div>
       </div>
-        
     </>
   );
 };

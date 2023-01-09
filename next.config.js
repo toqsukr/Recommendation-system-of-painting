@@ -3,6 +3,8 @@ const withPWA = require("next-pwa")({
   disable: process.env.NODE_ENV === "development",
 })
 
+const runtimeCaching = require("next-pwa/cache");
+
 const withImages = require('next-images')
 module.exports = withImages({
   webpack(config, options) {
@@ -12,6 +14,10 @@ module.exports = withImages({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = withPWA({
+  pwa: {
+    runtimeCaching,
+    buildExcludes: [/middleware-manifest.json$/]
+  },
   reactStrictMode: false,
   swcMinify: true,
   i18n: {
@@ -19,7 +25,6 @@ const nextConfig = withPWA({
     defaultLocale: "ru",
   },
   images: {
-    domains: ["https://api-for-r-sof-p.vercel.app/user/rcmd"],
     formats: ["image/webp"]
   }
 });
