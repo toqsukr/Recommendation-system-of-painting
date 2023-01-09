@@ -104,7 +104,7 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
     <>
     { !loading ? content && (
     <section id={css.section} className="container container-md container-sm container-centre py-5 text-center" >
-          {isUnique != null && (!exist 
+          {!exist 
           ?
             (success && (
               <div className={css.alert_container}>
@@ -124,7 +124,7 @@ export const MainImg = ({ data, loading, updateContent, updateLoading, isUnique,
                 </div>
               </div>
             )
-          )}
+          }
           <div
             className="container container-lg container-md container-sm"
             id={css.mainimg}

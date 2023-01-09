@@ -6,7 +6,7 @@ import { api } from '../information'
 import css from "./RcmdBody.module.css"
 
 export const RcmdBody = ({ updateAbout, email, cltnInfo, updateInfo, updateCltnInfo, info, footer, data, about}) => {
-    const [isUnique, setUnique] = useState(null)
+    const [isUnique, setUnique] = useState(true)
     const [content, setContent] = useState(null)
     const [loading, setLoading] = useState(true)
     const [first, setFirst] = useState(false)
