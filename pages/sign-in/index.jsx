@@ -1,5 +1,5 @@
 import {useState, React, useEffect} from 'react'
-import "bootstrap/dist/css/bootstrap.css";
+import {ReactSVG} from 'react-svg'
 import { Input } from '../../components/Input/Input'
 import { Button } from '../../components/Buttons/Button/Button'
 import { getFetch, postFetch } from '../../utils/Fetch';
@@ -52,21 +52,19 @@ export default function SignIn() {
         <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
-            {!correct && (
-              <div className={`alert alert-danger d-flex align-items-center ${css.container_alert}`} role="alert">
-                <img id={css.danger_icon} src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAACXBIWXMAAAsTAAALEwEAmpwYAAABYklEQVR4nOXYTarCMBAH8OjdxuzV+9S3qBsFPYIb4d2gV0jd6UkqNAx0ExlhCi58Nt95+IeBUmz50SQ1HSG+Iaaq5i3ARi0WHRUd0zlRQkxVzS9Snm+rVX+va0NFx3QuO9IIMbtIeboul32/2xk8HJ6l93tzXa+1kvI3G/IdDktAfsJhTuRUHOZA2uIwJdIVhymQvjiMibTBcZIhbZ8cJ8mTdBlWTvThdp1znKhz0mdBcKItHN/VyomyukO8Sjgu1/6JDPWe47he/xbZAvzQHo5+4HpzDABkJFlo0zsCaRd83269boyBgFS06VUA3SuwrssFtgCboofYCDFTJS+SkEiMgcuN1Lb/Jk7I49EMTfOsaDgf5NA04xycivTe0dggB0tgsD2hLXJIhXNFYkpcaKSO/WXng9Spvo1dkDp1d8EGqXP1Z6Ygde4Olyq1/fYJqUvA/YsWMGdsogN0VEU10WPnAbbPAnDwNWzfAAAAAElFTkSuQmCC"/>
+              <div className={css.container_alert} role="alert">
+                <ReactSVG id={css.danger_icon} src='icons/error.svg' />
                 <div id={css.alert_text}>
                 Неверный email или пароль!
                 </div>
               </div>
-            )}
               <legend>Вход в аккаунт</legend>
               <Input onChange={e => setEmail(e.target.value.toString().toLowerCase())} value={email} type='email' placeholder='Почта' required>Почта</Input>
               <Input onChange={e => setPassword(e.target.value)} value={password} type='password' placeholder='Пароль' required>Пароль</Input>
               
           </fieldset>
-          <Button type="submit" className='btn btn-primary'>Войти</Button>
-          <Link id={css.to_registr} href="/register">Регистрация</Link>
+          <Button type="submit">Войти</Button>
+          <Link id={css.registration} href="/register">Регистрация</Link>
       </form>
     </div>
   </>  
