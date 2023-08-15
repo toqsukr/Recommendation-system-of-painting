@@ -27,42 +27,40 @@ export default function myRecommendation() {
     return await response.json()
   })
   
-    useEffect(() => {
-      getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-          res => {
-            if(res["success"]) {
-            setAuth(true)
-            setEmail(res.user.email)
-          } else {
-            postFetch("https://norma.nomoreparties.space/api/auth/token", {
-              token: getCookie("refreshToken"),
-            }).then(res => {
-              if(res["success"])
-              {
-                setAuth(true)
-                setCookie("accessToken", res["accessToken"], 1);
-                setCookie("refreshToken", res["refreshToken"]);
-                getFetch("https://norma.nomoreparties.space/api/auth/user", res["accessToken"]).then(
-                  res => setEmail(res.user.email)
-                )
-              }
-              else router.push('/sign-in')
-            })
-          }
-        }
-      )
-  }, [])
+  //   useEffect(() => {
+  //     getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+  //         res => {
+  //           if(res["success"]) {
+  //           setAuth(true)
+  //           setEmail(res.user.email)
+  //         } else {
+  //           postFetch("https://norma.nomoreparties.space/api/auth/token", {
+  //             token: getCookie("refreshToken"),
+  //           }).then(res => {
+  //             if(res["success"])
+  //             {
+  //               setAuth(true)
+  //               setCookie("accessToken", res["accessToken"], 1);
+  //               setCookie("refreshToken", res["refreshToken"]);
+  //               getFetch("https://norma.nomoreparties.space/api/auth/user", res["accessToken"]).then(
+  //                 res => setEmail(res.user.email)
+  //               )
+  //             }
+  //             else router.push('/sign-in')
+  //           })
+  //         }
+  //       }
+  //     )
+  // }, [])
 
   return (
     <>
       <title>Рекомендации</title>
-      {auth && (
         <>
           <HeadRcm onClick={() => setInfo(true)} />
           <RcmdBody updateAbout={updateAbout} email={email} cltnInfo={cltnInfo} updateInfo={updateInfo} updateCltnInfo={updateCltnInfo} about={about} info={info} footer={footer} data={data}/>
           <Footer onClick={() => setAbout(true)}/>
         </>
-      )}
     </>
   );
 }

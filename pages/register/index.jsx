@@ -18,40 +18,39 @@ export default function register() {
     const [auth, setAuth] = useState(true)
     const router = useRouter();
 
-    useEffect(() => {
-      getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-          res => {
-          if(res["success"]) router.push('/')
-          else  setAuth(false)
-        }
-      )
-    }, [])
+    // useEffect(() => {
+    //   getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+    //       res => {
+    //       if(res["success"]) router.push('/')
+    //       else  setAuth(false)
+    //     }
+    //   )
+    // }, [])
 
     async function FormHandler(e) {
       e.preventDefault()
-      setCorrect(true)
-      postFetch("https://norma.nomoreparties.space/api/auth/register", {
-          email: email,
-          password: password,
-          name: name,
-      }).then(res => {
-          console.log(res)
-          if(!res["success"])  throw Error("This email has already exist!")
-          setCookie("accessToken", res["accessToken"], 1);
-          setCookie("refreshToken", res["refreshToken"])
-          postFetch(`${api.url}/user/userID`, {
-            userID: crc32.str(email, crc32).toString(),
-          }).then(res => console.log(res))
-          router.push("/")
-        }).catch(() => {
-          setCorrect(false)
-      })
+      // setCorrect(true)
+      // postFetch("https://norma.nomoreparties.space/api/auth/register", {
+      //     email: email,
+      //     password: password,
+      //     name: name,
+      // }).then(res => {
+      //     console.log(res)
+      //     if(!res["success"])  throw Error("This email has already exist!")
+      //     setCookie("accessToken", res["accessToken"], 1);
+      //     setCookie("refreshToken", res["refreshToken"])
+      //     postFetch(`${api.url}/user/userID`, {
+      //       userID: crc32.str(email, crc32).toString(),
+      //     }).then(res => console.log(res))
+      //     router.push("/")
+      //   }).catch(() => {
+      //     setCorrect(false)
+      // })
     }
     
   return (
     <>
       <title>Регистрация</title>
-      {!auth && (
         <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
@@ -73,7 +72,6 @@ export default function register() {
           <Link id={css.to_signin} href="/sign-in">Вход</Link>
       </form>
     </div>
-    )}
     </>
   )
 }

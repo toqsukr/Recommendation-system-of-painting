@@ -17,28 +17,28 @@ export default function myCollection() {
   const router = useRouter()
 
   
-  useEffect(() => {
-    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-          res => {
-                if(res["success"]) {
-                setAuth(true)
-              } else {
-                postFetch("https://norma.nomoreparties.space/api/auth/token", {
-                  token: getCookie("refreshToken"),
-                }).then(res => {
-                  if(res["success"])
-                  {
-                    setAuth(true)
-                    setCookie("accessToken", res["accessToken"], 1);
-                    setCookie("refreshToken", res["refreshToken"]);
-                  }
-                  else router.push('/sign-in')
-                }
-              )
-            }
-          }
-        )
-      }, [])
+  // useEffect(() => {
+  //   getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+  //         res => {
+  //               if(res["success"]) {
+  //               setAuth(true)
+  //             } else {
+  //               postFetch("https://norma.nomoreparties.space/api/auth/token", {
+  //                 token: getCookie("refreshToken"),
+  //               }).then(res => {
+  //                 if(res["success"])
+  //                 {
+  //                   setAuth(true)
+  //                   setCookie("accessToken", res["accessToken"], 1);
+  //                   setCookie("refreshToken", res["refreshToken"]);
+  //                 }
+  //                 else router.push('/sign-in')
+  //               }
+  //             )
+  //           }
+  //         }
+  //       )
+  //     }, [])
     
   const { data } = useSWR(`${api.url}/user/collection`, async () => {
     const response = await fetch(`${api.url}/user/collection`)
@@ -48,8 +48,6 @@ export default function myCollection() {
       
   return (
     <>
-      <title>Моя коллекция</title>
-      {auth && (
         <>
           <Controle data={data}/>
           {about && (
@@ -58,7 +56,7 @@ export default function myCollection() {
               />
           )}
         <Footer onClick={() => setAbout(true)}/>
-      </>)}
+      </>
     </>
   );
 }

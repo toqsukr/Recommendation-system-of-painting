@@ -19,37 +19,36 @@ export default function SignIn() {
   const [auth, setAuth] = useState(true)
   const router = useRouter();
 
-  useEffect(() => {
-    getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
-        res => {
-        if(res["success"]) router.push('/')
-        else  setAuth(false)
-      }
-    )
-  }, [])
+  // useEffect(() => {
+  //   getFetch("https://norma.nomoreparties.space/api/auth/user", getCookie("accessToken")).then(
+  //       res => {
+  //       if(res["success"]) router.push('/')
+  //       else  setAuth(false)
+  //     }
+  //   )
+  // }, [])
 
   async function FormHandler(e) {
       e.preventDefault()
-      setCorrect(true)
-      postFetch("https://norma.nomoreparties.space/api/auth/login", {
-          email,
-          password,
-      }).then(res => {
-        if(!res["success"])   throw Error("Incorrect email or password!")
-        setCookie("accessToken", res["accessToken"], 1);
-        setCookie("refreshToken", res["refreshToken"]);
-        postFetch(`${api.url}/user/userID`, {
-          userID: crc32.str(email, crc32).toString(),
-        }).then(res => console.log(res))
-        router.push("/")
-      }).catch(() => {
-        setCorrect(false)
-      })
+      // setCorrect(true)
+      // postFetch("https://norma.nomoreparties.space/api/auth/login", {
+      //     email,
+      //     password,
+      // }).then(res => {
+      //   if(!res["success"])   throw Error("Incorrect email or password!")
+      //   setCookie("accessToken", res["accessToken"], 1);
+      //   setCookie("refreshToken", res["refreshToken"]);
+      //   postFetch(`${api.url}/user/userID`, {
+      //     userID: crc32.str(email, crc32).toString(),
+      //   }).then(res => console.log(res))
+      //   router.push("/")
+      // }).catch(() => {
+      //   setCorrect(false)
+      // })
   }
   return (
     <>
       <title>Вход в аккаунт</title>
-      {!auth && (
         <div className={css.container}>
         <form onSubmit={FormHandler} className={css.form}>
             <fieldset className={css.form_inputs}>
@@ -70,7 +69,6 @@ export default function SignIn() {
           <Link id={css.to_registr} href="/register">Регистрация</Link>
       </form>
     </div>
-    )}
   </>  
   )
 }
