@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recommendation System of Painting - Frontend
 
-## Getting Started
+This is the frontend part of the Painting Recommendation web application. It is built using React, Next.js, JavaScript, and other frontend technologies. The application provides a user interface for recommending and exploring art pieces based on user preferences.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
+-   Art Recommendations: Get personalized recommendations for art pieces based on your preferences, such as art style, artist, era, and more.
+-   Art Exploration: Browse through a vast collection of art pieces from different artists and eras.
+-   User Profiles: Create and customize user profiles to save favorites, view browsing history, and manage recommendations.
+-   Search Functionality: Search for specific artists, art styles, or artworks by keywords.
+-   Artwork Details: View detailed information about a specific artwork, including artist, year, materials used, and description.
+-   Responsive Design: Enjoy a seamless experience across different devices and screen sizes.
+
+## Project Structure
+
+```
+├── pages/              # Pages directory for Next.js
+│   ├── index.jsx       # Homepage
+│   └── ...
+├── components/         # Reusable components
+│   └── ...
+├── utils/              # Utility functions
+│   └── ...
+├── public/             # Static files
+│   └── ...
+├── next.config.js      # Next.js configuration file
+├── .gitignore          # Git ignore configuration
+├── package.json        # NPM package dependencies
+└── README.md           # Project readme file
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   Next.js: Framework for building server-rendered React applications
+-   React: JavaScript library for building user interfaces
+-   JavaScript: Programming language for the frontend logic
+-   HTML: Markup language for structuring the application
+-   CSS: Styling language for designing the user interface
+-   React Router: Library for managing navigation and routing in the application
